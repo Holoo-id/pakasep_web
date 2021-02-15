@@ -12,10 +12,8 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/', 'App\Http\Controllers\RumahController@index');
 
-Route::get('/', function () {
-    return view('welcome');
-});
 Route::get('/post', 'App\Http\Controllers\RumahController@post');
 
 Route::post('/tambah', 'App\Http\Controllers\RumahController@store');

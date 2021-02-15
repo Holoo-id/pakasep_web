@@ -7,6 +7,10 @@ use Illuminate\Http\Request;
 
 class RumahController extends Controller
 {
+    public function index()
+    {
+        return view('b.dashboard');
+    }
     public function post(){
         return view('rumah');
     }
