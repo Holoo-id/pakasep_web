@@ -28,6 +28,7 @@
     <input type="date" name="tgl_imb" placeholder="Tanggal IMB">
     <input type="date" name="tgl_dibuat" placeholder="Tanggal Dibuat">
     <input type="text" name="kontak" placeholder="kontak">
+    <input type="file" name="upload" placeholder="upload">
     <input type="text" name="gambar" placeholder="gambar">
     <input type="submit" class="btn btn-danger" value="masuk">
     

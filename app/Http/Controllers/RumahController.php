@@ -25,6 +25,10 @@ class RumahController extends Controller
     }
 
     public function store(Request $request ){
+         
+        $image = $request->upload;
+
+        
         $rumah = app('firebase.firestore')->database()->collection('Rumah')->newDocument();
         $rumah->set([
             'nama_tempat' => $request->nama_tempat,
@@ -52,6 +56,7 @@ class RumahController extends Controller
         return redirect('/admin/dataRumah');
     }
     public function edit($id, Request $request){
+        
         $edit = app('firebase.firestore')->database()->collection('Rumah')->document($id);
         $edit->set([
             'nama_tempat' => $request->nama_tempat,
