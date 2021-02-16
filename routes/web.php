@@ -12,10 +12,11 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/', 'App\Http\Controllers\RumahController@index');
+Route::get('/', 'App\Http\Controllers\RumahController@index')->name('dashboard');
 
 Route::get('/post', 'App\Http\Controllers\RumahController@post');
 
 Route::post('/tambah', 'App\Http\Controllers\RumahController@store');
-
-Route::get('/select', 'App\Http\Controllers\RumahController@select')->name('select');
+Route::get('/hapus/{id}', 'App\Http\Controllers\RumahController@hapus');
+Route::post('/edit/{id}', 'App\Http\Controllers\RumahController@edit');
+Route::get('/admin/dataRumah', 'App\Http\Controllers\RumahController@dataRumah')->name('select');
