@@ -27,7 +27,7 @@
             <hr>
             <li><a href="">AJUKAN LOKASI PERUMAHAN</a></li>
             <hr>
-            <li><a href="">CEK STATUS PENGAJUAN</a></li>
+            <li><a href="/admin/pengajuan">CEK STATUS PENGAJUAN</a></li>
             <hr>
             <li><a href="/admin/dataRumah">DATA RUMAH TERDAFTAR</a></li>
         </ul>

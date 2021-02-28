@@ -11,11 +11,12 @@
 <body>
 <form action="/tambah" enctype="multipart/form-data" method="post">
    @csrf
-    <input type="text" name="nama_tempat" placeholder="Nama Tempat">
+   <input type="text" name="nama_tempat" placeholder="Nama Tempat">
     <input type="text" name="alamat" placeholder="Alamat">
     <input type="text" name="provinsi" placeholder="Provinsi">
     <input type="text" name="kota" placeholder="Kota">
     <input type="text" name="kecamatan" placeholder="Kecamatan">
+    <input type="text" name="pengembang" placeholder="pengembang">
     <input type="text" name="asosiasi" placeholder="Asosiasi">
     <input type="text" name="tenor" placeholder="Tenor">
     <input type="text" name="bunga" placeholder="bunga">
@@ -37,3 +38,4 @@
    
 </body>
 </html>
+@endsection
