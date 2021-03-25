@@ -15,6 +15,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', 'App\Http\Controllers\RumahController@index')->name('dashboard');
 
 Route::get('/post', 'App\Http\Controllers\RumahController@post');
+Route::get('/login', 'App\Http\Controllers\LoginController@index');
+Route::get('/auth', 'App\Http\Controllers\LoginController@auth');
 
 Route::post('/admin/tambah', 'App\Http\Controllers\RumahController@store');
 Route::get('/hapus/{id}', 'App\Http\Controllers\RumahController@hapus');
