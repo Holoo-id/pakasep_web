@@ -14,7 +14,7 @@
         "fruitcake/laravel-cors": "^2.0",
         "google/cloud-firestore": "^1.19",
         "grpc/grpc": "v1.27.0",
-        "guzzlehttp/guzzle": "^7.0.1",
+        "guzzlehttp/guzzle": "^7.3",
         "kreait/laravel-firebase": "^3.1",
         "laravel/fortify": "^1.7",
         "laravel/framework": "^8.12",

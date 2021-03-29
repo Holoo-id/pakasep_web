@@ -39,7 +39,7 @@
     <div class="be-main">
         <div class="welcome-text mb-1">
             Halo, 
-            <b>Welly Shergy Verzandy!</b>
+            <b>{{Session::get('instansi')}}!</b>
             <br>Selamat Datang Di Dashboard Pengembang 
             <b>PAKASEP</b>
             <br><br>

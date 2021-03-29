@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Http;
+use GuzzleHttp\Stream\Stream;
 
 
 class PengembangController extends Controller
@@ -15,7 +16,10 @@ class PengembangController extends Controller
     }
     public function pengajuanPerumahan()
     {
-        return view('backend.pengembang.pengajuan_perumahan');
+        $response = Http::get('https://dev.farizdotid.com/api/daerahindonesia/provinsi');
+        $provinsi = $response->json();
+        
+        return view('backend.pengembang.pengajuan_perumahan',compact('provinsi'));
     }
     public function profil()
     {

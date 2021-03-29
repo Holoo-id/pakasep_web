@@ -79,9 +79,14 @@
                 <div class="form-column">
                     <label for="" class="be-form-label mb-1 mt-2">Provinsi</label>
                     <select name="" id="" class="be-form">
-                        <option value="">Current</option>
-                        <option value="">Option 1</option>
-                        <option value="">Option 2</option>
+                        <option value="">Pilih</option>
+                     
+                        @foreach($provinsi as $gp)
+                        @foreach($gp as $g)
+                        
+                        <option value="">{{$g['nama'] }}</option>
+                      @endforeach
+                      @endforeach
                     </select>
                 </div>
                 <div class="form-column">
