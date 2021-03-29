@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Laravel\Fortify\Fortify;
+use Illuminate\Support\Facades\Session;
 
 class LoginController extends Controller
 {
@@ -16,17 +17,14 @@ class LoginController extends Controller
         $password = $request->password;
         $getDeveloper = app('firebase.firestore')->database()->collection('Developer');
         $getEmail = $getDeveloper->where('Email','==',$email)->documents();
-        if($getEmail == null){
-            echo"gagal";
-        }else{
-         echo"berhasil";
-        }
+    
         foreach ($getEmail as $ge) {
 
             if ($getEmail && Hash::check($password, $ge->data()['Kata Sandi'])) {
-            echo"Berhasil";
+                Session::put('instansi',$ge->data()['Instansi']);
+                return redirect('/pengembang/pengajuan-perumahan');
         }else{
-            echo"Gagal";
+            echo"gagal";
         }
         }
     

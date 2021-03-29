@@ -38,7 +38,7 @@
     </div>
     <div class="be-main">
         <div class="welcome-text mb-1">
-            Halo, <b>Welly Shergy Verzandy!</b><br>Selamat Datang Di Dashboard Pengembang <b>PAKASEP</b>
+            Halo, <b>{{Session::get('instansi')}}</b><br>Selamat Datang Di Dashboard Pengembang <b>PAKASEP</b>
         </div>
         @yield('content')
         <div class="foot mt-5">© 2021 — <b>PAKASEP</b> Dashboard untuk BANK (versi 1.0)</div>
