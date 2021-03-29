@@ -27,7 +27,7 @@
             </button>
         </div>
     </div>
-    <table id="example" class="display" style="width:100%">
+    <table id="dataPengajuanNasabah" class="display" style="width:100%">
         <thead>
             <tr>
                 <th>Nomor TX</th>

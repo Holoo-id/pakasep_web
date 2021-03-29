@@ -11,7 +11,7 @@
     <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.js"></script>
 </head>
-<body id="gradient-pg-bg" class="backend-layout">
+<body class="gradient-pg-bg backend-layout">
     <nav class="navbar">
         <!-- Pengembang Only Menu -->
         <ul class="top-menu ftc">
@@ -38,14 +38,20 @@
     </div>
     <div class="be-main">
         <div class="welcome-text mb-1">
-            Halo, <b>Welly Shergy Verzandy!</b><br>Selamat Datang Di Dashboard Pengembang <b>PAKASEP</b>
+            Halo, 
+            <b>Welly Shergy Verzandy!</b>
+            <br>Selamat Datang Di Dashboard Pengembang 
+            <b>PAKASEP</b>
+            <br><br>
+            <p>Berikut Data Perumahan Anda:</p>
         </div>
         @yield('content')
         <div class="foot mt-5">© 2021 — <b>PAKASEP</b> Dashboard untuk BANK (versi 1.0)</div>
     </div>
     <script>
         $(document).ready(function() {
-            $('#example').DataTable();
+            $('#dataPengajuanNasabah').DataTable();
+            $('#dataPengajuanPerumahan').DataTable();
         } );
     </script>
     <script>

@@ -2,7 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BankController;
+use App\Http\Controllers\FrontController;
 use App\Http\Controllers\PengembangController;
 use App\Http\Controllers\RumahController;
 
@@ -17,7 +19,6 @@ use App\Http\Controllers\RumahController;
 |
 */
 // Route::get('/', 'App\Http\Controllers\RumahController@index')->name('dashboard');
-Route::get('/', [RumahController::class, 'index'])->name('dashboard');
 
 Route::get('/post', 'App\Http\Controllers\RumahController@post');
 Route::get('/login', 'App\Http\Controllers\LoginController@index');
@@ -32,6 +33,12 @@ Route::get('/admin/pengajuan', 'App\Http\Controllers\PengajuanRumahController@in
 Route::get('/admin/pengajuan/pdfpengajuan', 'App\Http\Controllers\PengajuanRumahController@cetak_pdf');
 
 // New
+Route::get('/', [FrontController::class, 'index'])->name('index');
+Route::get('/gallery', [FrontController::class, 'gallery'])->name('user-gallery');
+
+Route::prefix('/admin')->group(function () {
+    Route::get('/', [AdminController::class, 'index'])->name('admin-dashboard');
+});
 Route::prefix('/bank')->group(function () {
     Route::get('/', [BankController::class, 'index'])->name('bank-main');
 });

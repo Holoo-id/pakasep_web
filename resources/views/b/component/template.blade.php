@@ -18,7 +18,7 @@
     <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.js"></script>
 </head>
-<body id="gradient-pg-bg" class="backend-layout">
+<body class="gradient-pg-bg backend-layout">
     <nav class="navbar">
         <ul class="top-menu ftc">
             <li><a href="">PROFIL PENGEMBANG</a></li>

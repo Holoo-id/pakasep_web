@@ -10,7 +10,7 @@
 </head>
 <body class="backend-layout">
     <div class="half-page-wrap">
-        <div id="gradient-pg-bg" class="half-page-bg">
+        <div class="gradient-pg-bg half-page-bg">
             <figure>
                 <img src="{{ asset('images/website-pengembang.png') }}" alt="">
             </figure>
@@ -31,14 +31,14 @@
                 <form action="/auth" method="get" enctype="multipart/form-data">
                 @csrf
                     <div class="form-column">
-                        <label for="" class="be-log-form-label mb-1 mt-2">Email</label>
-                        <input class="be-log-form" type="email" name="email" id="" placeholder="Masukkan Email">
+                        <label for="" class="be-form-label mb-1 mt-2">Email</label>
+                        <input class="be-form" type="email" name="email" id="" placeholder="Masukkan Email">
                     </div>
                     <div class="form-column">
-                        <label for="" class="be-log-form-label mb-1 mt-2">Password</label>
-                        <input class="be-log-form" type="password" name="password" id="" placeholder="Masukkan Password">
+                        <label for="" class="be-form-label mb-1 mt-2">Password</label>
+                        <input class="be-form" type="password" name="password" id="" placeholder="Masukkan Password">
                     </div>
-                    <input type="submit" value="Masuk" class="be-log-form-button mt-2">
+                    <input type="submit" value="Masuk" class="be-form-button mt-2">
                 </form>
                 <div class="divider-wrap mv-1">
                     <p class="text-divider"><span>atau</span></p>

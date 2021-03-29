@@ -20,7 +20,7 @@
 
 </head>
 <body>
-<body id="gradient-pg-bg" class="backend-layout">
+<body class="gradient-pg-bg backend-layout">
     <nav class="navbar">
         <ul class="top-menu">
             <li>PROFIL PENGEMBANG</li>
