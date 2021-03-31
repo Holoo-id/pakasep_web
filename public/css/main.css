@@ -195,6 +195,22 @@ footer {
   font-weight: 900;
 }
 
+.house-left-content h3 {
+  color: #3F414E;
+  font-family: "Poppins", sans-serif;
+  font-size: 28px;
+  font-weight: 900;
+  line-height: 38px;
+}
+
+.house-left-content p {
+  color: #333;
+  font-family: "Catamaran", sans-serif;
+  font-size: 25px;
+  letter-spacing: 0.02em;
+  line-height: 1em;
+}
+
 .house-subtitle {
   color: #767676;
   font-family: "Poppins", sans-serif;
@@ -301,6 +317,10 @@ p.text-divider > span {
 
 .mb-3 {
   margin-bottom: 3em;
+}
+
+.mb-4 {
+  margin-bottom: 4em;
 }
 
 .mb-5 {
@@ -848,6 +868,24 @@ input[type=search] {
   font-weight: 600;
 }
 
+input[type="checkbox" i] {
+  background-color: red;
+  -webkit-appearance: checkbox;
+  cursor: pointer;
+}
+
+input[type="checkbox" i]::before {
+  background-color: #000;
+}
+
+input[type="checkbox" i]::after {
+  background-color: #04A17C;
+}
+
+input[type="checkbox" i]::checked {
+  background-color: #04A17C;
+}
+
 .be-form {
   border: 1px solid #8692A6;
   border-radius: 6px;
@@ -1206,6 +1244,12 @@ input[type=search] {
   -ms-grid-columns: (32%)[3];
       grid-template-columns: repeat(3, 32%);
   width: 100%;
+}
+
+.unit-data-outline {
+  border: solid #3F414E;
+  border-width: 0.6px 0;
+  padding: 2em 0;
 }
 
 .unit-data-item {
