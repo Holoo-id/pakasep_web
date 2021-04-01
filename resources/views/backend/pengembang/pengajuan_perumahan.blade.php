@@ -152,22 +152,26 @@
             </div>
         </div>
         <div class="setup-content" id="step-3">
-            <div class="grid grid-2col w-full mb-5">
+            <div class="grid grid-4col w-full mb-5">
+                <img id="fotoDepan" alt="Preview - Foto Tampak Depan" class="be-preview-image">
+                <img id="fotoDalam" alt="Preview - Foto Tampak Dalam Rumah" class="be-preview-image">
+                <img id="fotoJalan" alt="Preview - Foto Lingkungan" class="be-preview-image">
+                <img id="fotoGerbang" alt="Preview - Foto Gerbang" class="be-preview-image">
                 <div class="form-column">
-                    <label for="" class="be-form-label mb-1 mt-2">Foto Tampak Depan Rumah</label>
-                    <input class="be-form" type="file" name="" id="" placeholder="Foto Tampak Depan Rumah">
+                    <input class="be-form" type="file" accept="image/*" onchange="document.getElementById('fotoDepan').src = window.URL.createObjectURL(this.files[0])">
+                    <label for="" class="be-form-label mb-2 mt-1">Foto Tampak Depan Rumah</label>
                 </div>
                 <div class="form-column">
-                    <label for="" class="be-form-label mb-1 mt-2">Foto Tampak Dalam Rumah</label>
-                    <input class="be-form" type="file" name="" id="" placeholder="Foto Tampak Dalam Rumah">
+                    <input class="be-form" type="file" accept="image/*" onchange="document.getElementById('fotoDalam').src = window.URL.createObjectURL(this.files[0])">
+                    <label for="" class="be-form-label mb-2 mt-1">Foto Tampak Dalam Rumah</label>
                 </div>
                 <div class="form-column">
-                    <label for="" class="be-form-label mb-1 mt-2">Foto Jalan/Lingkungan Sekitar</label>
-                    <input class="be-form" type="file" name="" id="" placeholder="Foto Jalan/Lingkungan Sekitar">
+                    <input class="be-form" type="file" accept="image/*" onchange="document.getElementById('fotoJalan').src = window.URL.createObjectURL(this.files[0])">
+                    <label for="" class="be-form-label mb-2 mt-1">Foto Jalan/Lingkungan Sekitar</label>
                 </div>
                 <div class="form-column">
-                    <label for="" class="be-form-label mb-1 mt-2">Foto Gerbang Perumahan</label>
-                    <input class="be-form" type="file" name="" id="" placeholder="Foto Gerbang Perumahan">
+                    <input class="be-form" type="file" accept="image/*" onchange="document.getElementById('fotoGerbang').src = window.URL.createObjectURL(this.files[0])">
+                    <label for="" class="be-form-label mb-2 mt-1">Foto Gerbang Perumahan</label>
                 </div>
             </div>
             <div class="button-bar w-75">

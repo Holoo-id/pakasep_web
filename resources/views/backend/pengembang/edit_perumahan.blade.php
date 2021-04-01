@@ -1,69 +1,27 @@
 @extends('backend.template.base')
 @section('content')
     <form action="" method="post" class="mh-2">
-        <div class="setup-content">
-            <div class="image-preview grid grid-4col w-full mb-4">
+        <div class="setup-content2">
+            <div class="grid grid-4col w-full mb-5">
+                <img src="" id="fotoDepan" alt="Preview - Foto Tampak Depan" class="be-preview-image">
+                <img src="" id="fotoDalam" alt="Preview - Foto Tampak Dalam Rumah" class="be-preview-image">
+                <img src="" id="fotoJalan" alt="Preview - Foto Lingkungan" class="be-preview-image">
+                <img src="" id="fotoGerbang" alt="Preview - Foto Gerbang" class="be-preview-image">
                 <div class="form-column">
-                    <img src="images/bg1.png" alt=""  title="Klik untuk mengganti gambar" onclick="">
-                    <input class="dadfiwp" type="file" accept="image/*" >
+                    <input class="be-form" type="file" accept="image/*" onchange="document.getElementById('fotoDepan').src = window.URL.createObjectURL(this.files[0])">
                     <label for="" class="be-form-label mb-2 mt-1">Foto Tampak Depan Rumah</label>
                 </div>
                 <div class="form-column">
-                    <img src="images/bg1.png" alt="">
-                    <input class="dadfiwp" type="file" name="" id="" placeholder="Foto Tampak Dalam Rumah">
+                    <input class="be-form" type="file" accept="image/*" onchange="document.getElementById('fotoDalam').src = window.URL.createObjectURL(this.files[0])">
                     <label for="" class="be-form-label mb-2 mt-1">Foto Tampak Dalam Rumah</label>
                 </div>
                 <div class="form-column">
-                    <img src="images/bg1.png" alt="">
-                    <input class="dadfiwp" type="file" name="" id="" placeholder="Foto Jalan/Lingkungan Sekitar">
+                    <input class="be-form" type="file" accept="image/*" onchange="document.getElementById('fotoJalan').src = window.URL.createObjectURL(this.files[0])">
                     <label for="" class="be-form-label mb-2 mt-1">Foto Jalan/Lingkungan Sekitar</label>
                 </div>
                 <div class="form-column">
-                    <img src="images/bg1.png" alt="">
-                    <input class="dadfiwp" type="file" name="" id="" placeholder="Foto Gerbang Perumahan">
+                    <input class="be-form" type="file" accept="image/*" onchange="document.getElementById('fotoGerbang').src = window.URL.createObjectURL(this.files[0])">
                     <label for="" class="be-form-label mb-2 mt-1">Foto Gerbang Perumahan</label>
-                </div>
-            </div>
-            <div class="grid grid-2col w-full mb-2-5">
-                <div class="form-column">
-                    <label for="" class="be-form-label mb-1 mt-2">Nama Tipe Perumahan</label>
-                    <input class="be-form" type="text" name="" id="" placeholder="Masukkan Nama Tipe Perumahan">
-                </div>
-                <div class="form-column">
-                    <label for="" class="be-form-label mb-1 mt-2">Jumlah Kamar Mandi</label>
-                    <input class="be-form" type="number" name="" id="" placeholder="Masukkan Jumlah Kamar Mandi">
-                </div>
-                <div class="form-column">
-                    <label for="" class="be-form-label mb-1 mt-2">Harga</label>
-                    <input class="be-form" type="number" name="" id="" placeholder="Masukkan Harga">
-                </div>
-                <div class="form-column">
-                    <label for="" class="be-form-label mb-1 mt-2">Spesifikasi Teknis Atap</label>
-                    <input class="be-form" type="text" name="" id="" placeholder="Masukkan Spesifikasi Teknis Atap">
-                </div>
-                <div class="form-column">
-                    <label for="" class="be-form-label mb-1 mt-2">Luas Lahan</label>
-                    <input class="be-form" type="number" name="" id="" placeholder="Masukkan Luas Lahan">
-                </div>
-                <div class="form-column">
-                    <label for="" class="be-form-label mb-1 mt-2">Spesifikasi Teknis Dinding</label>
-                    <input class="be-form" type="text" name="" id="" placeholder="Masukkan Spesifikasi Teknis Dinding">
-                </div>
-                <div class="form-column">
-                    <label for="" class="be-form-label mb-1 mt-2">Luas Bangunan</label>
-                    <input class="be-form" type="number" name="" id="" placeholder="Masukkan Luas Bangunan">
-                </div>
-                <div class="form-column">
-                    <label for="" class="be-form-label mb-1 mt-2">Spesifikasi Teknis Lantai</label>
-                    <input class="be-form" type="text" name="" id="" placeholder="Masukkan Spesifikasi Teknis Lantai">
-                </div>
-                <div class="form-column">
-                    <label for="" class="be-form-label mb-1 mt-2">Jumlah Kamar TIdur</label>
-                    <input class="be-form" type="number" name="" id="" placeholder="Masukkan Jumlah Kamar TIdur">
-                </div>
-                <div class="form-column">
-                    <label for="" class="be-form-label mb-1 mt-2">Spesifikasi Teknis Pondasi</label>
-                    <input class="be-form" type="text" name="" id="" placeholder="Masukkan Spesifikasi Teknis Pondasi">
                 </div>
             </div>
             <hr class="mb-1">
