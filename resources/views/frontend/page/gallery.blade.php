@@ -1,5 +1,6 @@
 @extends('frontend.component.base')
 @section('content')
+    <h1 class="app-tagline1 mv-1">Galeri Perumahan</h1>
     <div class="centered">
         <div class="w-75">
             <div class="grid grid-4col centered mb-1">

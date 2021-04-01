@@ -18,7 +18,6 @@
             <li><a href="http://bataru.id/">BATARU</a></li>
         </ul>
     </nav>
-    <h1 class="app-tagline1 mv-1">Galeri Perumahan</h1>
     @yield('content')
     <footer class="gradient-pg-bg pv-1">
         <p> © Copyright 2021 — 

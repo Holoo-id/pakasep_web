@@ -32,9 +32,10 @@ Route::get('/admin/dataRumah/pdfrumah', 'App\Http\Controllers\RumahController@ce
 Route::get('/admin/pengajuan', 'App\Http\Controllers\PengajuanRumahController@index');
 Route::get('/admin/pengajuan/pdfpengajuan', 'App\Http\Controllers\PengajuanRumahController@cetak_pdf');
 
-// New
+// New -- For Page Only -- Ganti mah ganti we..
 Route::get('/', [FrontController::class, 'index'])->name('index');
 Route::get('/gallery', [FrontController::class, 'gallery'])->name('user-gallery');
+Route::get('/perumahan', [FrontController::class, 'perumahan'])->name('user-perumahan');
 
 Route::prefix('/admin')->group(function () {
     Route::get('/', [AdminController::class, 'index'])->name('admin-dashboard');
@@ -43,6 +44,7 @@ Route::prefix('/bank')->group(function () {
     Route::get('/', [BankController::class, 'index'])->name('bank-main');
 });
 Route::prefix('/pengembang')->group(function () {
+    Route::get('/edit-perumahan', [PengembangController::class, 'editPerumahan'])->name('pengembang-edit');
     Route::get('/data-perumahan', [PengembangController::class, 'dataPerumahan'])->name('pengembang-perumahan');
     Route::get('/pengajuan-perumahan', [PengembangController::class, 'pengajuanPerumahan'])->name('pengembang-pengajuan');
     Route::get('/profil-pengembang', [PengembangController::class, 'profil'])->name('pengembang-profil');

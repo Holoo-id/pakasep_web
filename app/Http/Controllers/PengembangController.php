@@ -10,6 +10,10 @@ use GuzzleHttp\Stream\Stream;
 
 class PengembangController extends Controller
 {
+    public function editPerumahan()
+    {
+        return view('backend.pengembang.edit_perumahan');
+    }
     public function dataPerumahan()
     {
         return view('backend.pengembang.data_perumahan');

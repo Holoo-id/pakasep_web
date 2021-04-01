@@ -17,4 +17,8 @@ class FrontController extends Controller
     {
         return view('frontend.page.gallery');
     }
+    public function perumahan()
+    {
+        return view('frontend.page.detail');
+    }
 }
