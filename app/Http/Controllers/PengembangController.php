@@ -14,12 +14,20 @@ class PengembangController extends Controller
     {
         return view('backend.pengembang.data_perumahan');
     }
-    public function pengajuanPerumahan()
+    public function pengajuanPerumahan(Request $request)
     {
         $response = Http::get('https://dev.farizdotid.com/api/daerahindonesia/provinsi');
+        $rest = Http::get('https://dev.farizdotid.com/api/daerahindonesia/provinsi');
+
         $provinsi = $response->json();
+        $getIdProvinsi = $response->json();
+
+    
+       
+        $tipeRumah = $request->namaTipe_rumah;
+
         
-        return view('backend.pengembang.pengajuan_perumahan',compact('provinsi'));
+        return view('backend.pengembang.pengajuan_perumahan',compact('provinsi','tipeRumah'));
     }
     public function profil()
     {
@@ -28,5 +36,14 @@ class PengembangController extends Controller
     public function statusPengajuan()
     {
         return view('backend.pengembang.status_pengajuan');
+    }
+
+    public function kota(Request $request, $id){
+       
+        $response = Http::get('https://dev.farizdotid.com/api/daerahindonesia/kota?id_provinsi='.$id);
+        $kota = $response->json();
+
+
+        return $kota;
     }
 }

@@ -21,7 +21,7 @@ use App\Http\Controllers\RumahController;
 // Route::get('/', 'App\Http\Controllers\RumahController@index')->name('dashboard');
 
 Route::get('/post', 'App\Http\Controllers\RumahController@post');
-Route::get('/', 'App\Http\Controllers\LoginController@index');
+Route::get('/login/pengembang', 'App\Http\Controllers\LoginController@index');
 Route::get('/auth', 'App\Http\Controllers\LoginController@auth');
 
 Route::post('/admin/tambah', 'App\Http\Controllers\RumahController@store');
@@ -47,4 +47,5 @@ Route::prefix('/pengembang')->group(function () {
     Route::get('/pengajuan-perumahan', [PengembangController::class, 'pengajuanPerumahan'])->name('pengembang-pengajuan');
     Route::get('/profil-pengembang', [PengembangController::class, 'profil'])->name('pengembang-profil');
     Route::get('/status-pengajuan', [PengembangController::class, 'statusPengajuan'])->name('pengembang-status');
+    Route::get('/dataKota/{id}', [PengembangController::class, 'kota'])->name('kota');
 });
