@@ -52,10 +52,7 @@
         $(document).ready(function() {
             $('#dataPengajuanNasabah').DataTable();
             $('#dataPengajuanPerumahan').DataTable();
-        } );
-    </script>
-    <script>
-        $(document).ready(function() {
+
             var navListItems = $('div.setup-panel div a'),
                     allWells = $('.setup-content'),
                     allPrevBtn = $('.prevBtn'),
@@ -115,6 +112,19 @@
             });
 
             $('div.setup-panel div a.active').trigger('click');
+
+            $('#provinsi_dok').change( function() {
+               $.getJSON('/pengembang/dataKota/'+$('#provinsi_dok').val(), 
+               function(data){
+                    $('#kota_dok').find('option').remove();
+                    $.each(data, function(title,arrayKota){
+                        $.each(arrayKota, function(i,j){
+                            $('#kota_dok').append(new Option(j['nama'],j['id']))
+                        });
+                    })
+               });
+               
+            });
         } );
     </script>
 
@@ -206,27 +216,6 @@
 
    
         }
-
-
-        $(document).ready(function() {
-        var id= 32;
-        $.ajax({
-            url: "/pengembang/dataKota/"+id,
-            type: "GET",
-            data:{ 
-                _token:'{{ csrf_token() }}'
-            },
-            cache: false,
-            dataType: 'json',
-            success: function(dataResult){
-                $.each(dataResult , gr){
-                    $.each(gr , g){
-                   $('#kota_dok').append(new Option(g.nama, g.id));
-                }
-                }
-                });
-        });
-    
     </script>
 </body>
 </html>
