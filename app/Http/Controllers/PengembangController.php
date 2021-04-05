@@ -50,4 +50,20 @@ class PengembangController extends Controller
 
         return $kota;
     }
+    public function kecamatan(Request $request, $id){
+       
+        $response = Http::get('https://dev.farizdotid.com/api/daerahindonesia/kecamatan?id_kota='.$id);
+        $kecamatan = $response->json();
+
+
+        return $kecamatan;
+    }
+    public function kelurahan(Request $request, $id){
+       
+        $response = Http::get('https://dev.farizdotid.com/api/daerahindonesia/kelurahan?id_kecamatan='.$id);
+        $kelurahan = $response->json();
+
+
+        return $kelurahan;
+    }
 }

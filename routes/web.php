@@ -50,4 +50,6 @@ Route::prefix('/pengembang')->group(function () {
     Route::get('/profil-pengembang', [PengembangController::class, 'profil'])->name('pengembang-profil');
     Route::get('/status-pengajuan', [PengembangController::class, 'statusPengajuan'])->name('pengembang-status');
     Route::get('/dataKota/{id}', [PengembangController::class, 'kota'])->name('kota');
+    Route::get('/dataKecamatan/{id}', [PengembangController::class, 'kecamatan'])->name('kecamatan');
+    Route::get('/dataKelurahan/{id}', [PengembangController::class, 'kelurahan'])->name('kelurahan');
 });

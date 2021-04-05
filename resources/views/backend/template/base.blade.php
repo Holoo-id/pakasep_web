@@ -119,7 +119,43 @@
                     $('#kota_dok').find('option').remove();
                     $.each(data, function(title,arrayKota){
                         $.each(arrayKota, function(i,j){
+                            $( "#kota_dok" ).prop( "disabled", false )
                             $('#kota_dok').append(new Option(j['nama'],j['id']))
+                        });
+                    })
+               });
+               
+            });
+        
+
+        //kecamatan
+        $('div.setup-panel div a.active').trigger('click');
+
+            $('#kota_dok').change( function() {
+               $.getJSON('/pengembang/dataKecamatan/'+$('#kota_dok').val(), 
+               function(dataKec){
+                    $('#kecamatan_dok').find('option').remove();
+                    $.each(dataKec, function(title,arrayKecamatan){
+                        $.each(arrayKecamatan, function(k,t){
+                            $( "#kecamatan_dok" ).prop( "disabled", false )
+                            $('#kecamatan_dok').append(new Option(t['nama'],t['id']))
+                        });
+                    })
+               });
+               
+            });
+
+            //kelurahan
+            $('div.setup-panel div a.active').trigger('click');
+
+            $('#kecamatan_dok').change( function() {
+               $.getJSON('/pengembang/dataKelurahan/'+$('#kecamatan_dok').val(), 
+               function(dataKel){
+                    $('#kelurahan_dok').find('option').remove();
+                    $.each(dataKel, function(title,arrayKelurahan){
+                        $.each(arrayKelurahan, function(k,l){
+                            $( "#kelurahan_dok" ).prop( "disabled", false )
+                            $('#kelurahan_dok').append(new Option(l['nama'],l['id']))
                         });
                     })
                });
@@ -165,19 +201,21 @@
         function formDisProv(){
             document.getElementById("kelurahan_dok").disabled = true;
             document.getElementById("kecamatan_dok").disabled = true;
+            document.getElementById("kota_dok").disabled = true;
 
             document.getElementById("kelurahan_dok").value = "";
             document.getElementById("kecamatan_dok").value = "";
             document.getElementById("kota_dok").value = "";
         }
         function formDisKota(){
-            document.getElementById("kecamatan_dok").disabled = false;
+            document.getElementById("kecamatan_dok").disabled = true;
+            document.getElementById("kelurahan_dok").disabled = true;
 
             document.getElementById("kelurahan_dok").value = "";
             document.getElementById("kecamatan_dok").value = "";
         }
         function formDisKec(){
-            document.getElementById("kelurahan_dok").disabled = false;
+            document.getElementById("kelurahan_dok").disabled = true;
             document.getElementById("kelurahan_dok").value = "";
         }
         function getValueDokToVerif(){
@@ -185,7 +223,7 @@
             document.getElementById("namaPerumahan_dok").value;
 
             document.getElementById("provinsi_verif").value = 
-            document.getElementById("optionProvinsi").value;
+            document.getElementById("provinsi_dok").value;
 
             document.getElementById("jenisPerumahan_verif").value = 
             document.getElementById("jenisPerumahan_dok").value;
