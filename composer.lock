@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4a8935d6cd50cd0fd6e63e6a392589b6",
+    "content-hash": "972d96c55052d394464af991df77a7e3",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -1360,16 +1360,16 @@
         },
         {
             "name": "google/protobuf",
-            "version": "v3.15.6",
+            "version": "v3.15.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/protocolbuffers/protobuf-php.git",
-                "reference": "3237975660b8fd3ed51cf34312a1a166572d2463"
+                "reference": "96b613b0de4a96ef423404ea893b19e7e2cfe474"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/protocolbuffers/protobuf-php/zipball/3237975660b8fd3ed51cf34312a1a166572d2463",
-                "reference": "3237975660b8fd3ed51cf34312a1a166572d2463",
+                "url": "https://api.github.com/repos/protocolbuffers/protobuf-php/zipball/96b613b0de4a96ef423404ea893b19e7e2cfe474",
+                "reference": "96b613b0de4a96ef423404ea893b19e7e2cfe474",
                 "shasum": ""
             },
             "require": {
@@ -1399,9 +1399,9 @@
             ],
             "support": {
                 "issues": "https://github.com/protocolbuffers/protobuf-php/issues",
-                "source": "https://github.com/protocolbuffers/protobuf-php/tree/v3.15.6"
+                "source": "https://github.com/protocolbuffers/protobuf-php/tree/v3.15.7"
             },
-            "time": "2021-03-11T20:45:02+00:00"
+            "time": "2021-04-02T21:19:22+00:00"
         },
         {
             "name": "graham-campbell/result-type",
@@ -2122,16 +2122,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v8.35.1",
+            "version": "v8.36.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "d118c0df39e7524131176aaf76493eae63a8a602"
+                "reference": "0debd8ad6b5aa1f61ccc73910adf049af4ca0444"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/d118c0df39e7524131176aaf76493eae63a8a602",
-                "reference": "d118c0df39e7524131176aaf76493eae63a8a602",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/0debd8ad6b5aa1f61ccc73910adf049af4ca0444",
+                "reference": "0debd8ad6b5aa1f61ccc73910adf049af4ca0444",
                 "shasum": ""
             },
             "require": {
@@ -2286,7 +2286,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2021-03-30T21:34:17+00:00"
+            "time": "2021-04-07T12:37:22+00:00"
         },
         {
             "name": "laravel/tinker",
@@ -7193,16 +7193,16 @@
         },
         {
             "name": "laravel/sail",
-            "version": "v1.4.10",
+            "version": "v1.4.11",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/sail.git",
-                "reference": "4f0b2bac128ee60a11d9758651f103f78157474a"
+                "reference": "e46a3228da4e95a411a981ac807bd119ab2485fa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/sail/zipball/4f0b2bac128ee60a11d9758651f103f78157474a",
-                "reference": "4f0b2bac128ee60a11d9758651f103f78157474a",
+                "url": "https://api.github.com/repos/laravel/sail/zipball/e46a3228da4e95a411a981ac807bd119ab2485fa",
+                "reference": "e46a3228da4e95a411a981ac807bd119ab2485fa",
                 "shasum": ""
             },
             "require": {
@@ -7249,7 +7249,7 @@
                 "issues": "https://github.com/laravel/sail/issues",
                 "source": "https://github.com/laravel/sail"
             },
-            "time": "2021-03-30T21:26:44+00:00"
+            "time": "2021-04-06T14:00:39+00:00"
         },
         {
             "name": "mockery/mockery",

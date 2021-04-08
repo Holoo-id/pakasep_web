@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use Laravel\Fortify\Fortify;
 use Illuminate\Support\Facades\Session;
 
 class LoginController extends Controller
@@ -22,6 +21,7 @@ class LoginController extends Controller
 
             if ($getEmail && Hash::check($password, $ge->data()['Kata Sandi'])) {
                 Session::put('instansi',$ge->data()['Instansi']);
+                Session::put('id',$ge->id());
                 return redirect('/pengembang/pengajuan-perumahan');
         }else{
             echo"gagal";

@@ -136,7 +136,7 @@
                 <div class="form-column">
                     <label for="" class="be-form-label mb-1 mt-2">Kabupaten/Kota</label>
                     <select name="kota_dok" id="kota_dok" class="be-form" onclick="formDisKota()">
-                        <option value="">Current</option>
+                    <option selected value=""></option>
                         <option value="">Option 1</option>
                         <option value="">Option 2</option>
                     </select>
@@ -148,38 +148,47 @@
             </div>
             <div class="button-bar w-75">
                 <button class="prevBtn bg-purple btn-fill ftc" type="button" >KEMBALI</button>
-                <button class="nextBtn bg-purple btn-fill ftc" type="button" onclick="getValueDokToVerif()">SIMPAN</button>
+                <button class="nextBtn bg-purple btn-fill ftc" id="btn" type="button" onclick="getValueDokToVerif()">SIMPAN</button>
             </div>
         </div>
         <div class="setup-content" id="step-3">
+        <form action="/pengembang/tambahGambar" method="post">
+        @csrf
             <div class="grid grid-4col w-full mb-5">
                 <img id="fotoDepan" alt="Preview - Foto Tampak Depan" class="be-preview-image">
                 <img id="fotoDalam" alt="Preview - Foto Tampak Dalam Rumah" class="be-preview-image">
                 <img id="fotoJalan" alt="Preview - Foto Lingkungan" class="be-preview-image">
                 <img id="fotoGerbang" alt="Preview - Foto Gerbang" class="be-preview-image">
                 <div class="form-column">
-                    <input class="be-form" type="file" accept="image/*" onchange="document.getElementById('fotoDepan').src = window.URL.createObjectURL(this.files[0])">
+                    <input class="be-form" name="fotoDepanRumah" type="file" accept="image/*" onchange="document.getElementById('fotoDepan').src = window.URL.createObjectURL(this.files[0])">
                     <label for="" class="be-form-label mb-2 mt-1">Foto Tampak Depan Rumah</label>
+                    <input class="be-form" type="text" name="txtFotoDepanRumah" id="" placeholder="Masukkan Nama Foto">
                 </div>
                 <div class="form-column">
-                    <input class="be-form" type="file" accept="image/*" onchange="document.getElementById('fotoDalam').src = window.URL.createObjectURL(this.files[0])">
+                    <input class="be-form" name="fotoDalamRumah" type="file" accept="image/*" onchange="document.getElementById('fotoDalam').src = window.URL.createObjectURL(this.files[0])">
                     <label for="" class="be-form-label mb-2 mt-1">Foto Tampak Dalam Rumah</label>
+                    <input class="be-form" type="text" name="txtFotoDalamRumah" id="" placeholder="Masukkan Nama Foto">
                 </div>
                 <div class="form-column">
-                    <input class="be-form" type="file" accept="image/*" onchange="document.getElementById('fotoJalan').src = window.URL.createObjectURL(this.files[0])">
+                    <input class="be-form" name="fotoJalan" type="file" accept="image/*" onchange="document.getElementById('fotoJalan').src = window.URL.createObjectURL(this.files[0])">
                     <label for="" class="be-form-label mb-2 mt-1">Foto Jalan/Lingkungan Sekitar</label>
+                    <input class="be-form" type="text" name="txtFotoJalan" id="" placeholder="Masukkan Nama Foto">
                 </div>
                 <div class="form-column">
-                    <input class="be-form" type="file" accept="image/*" onchange="document.getElementById('fotoGerbang').src = window.URL.createObjectURL(this.files[0])">
+                    <input class="be-form" name="fotoGerbangPerumahan" type="file" accept="image/*" onchange="document.getElementById('fotoGerbang').src = window.URL.createObjectURL(this.files[0])">
                     <label for="" class="be-form-label mb-2 mt-1">Foto Gerbang Perumahan</label>
+                    <input class="be-form" type="text" name="txtFotoGerbangPerumahan" id="" placeholder="Masukkan Nama Foto">
                 </div>
             </div>
             <div class="button-bar w-75">
                 <button class="prevBtn bg-purple btn-fill ftc" type="button" >KEMBALI</button>
-                <button class="nextBtn bg-purple btn-fill ftc" type="button" >SIMPAN</button>
+                <button class="nextBtn bg-purple btn-fill ftc" type="submit"  formenctype="multipart/form-data" >SIMPAN</button>
             </div>
+            </form>
         </div>
         <div class="setup-content" id="step-4">
+        <form action="/pengembang/tambahRumah" method="post" enctype="multipart/form-data">
+        @csrf
             <div class="grid grid-2col w-full mb-2-5">
                 <div class="form-column">
                     <label for="" class="be-form-label mb-1 mt-2">Nama Tipe Perumahan</label>
@@ -230,16 +239,7 @@
                 </div>
                 <div class="form-column">
                     <label for="" class="be-form-label mb-1 mt-2">Provinsi</label>
-                    <select name="provinsi_verif" id="provinsi_verif" class="be-form">
-                        <option value="">Pilih</option>
-                        
-                        @foreach($provinsi as $gp)
-                        @foreach($gp as $g)
-                        
-                        <option value="{{$g['nama'] }}">{{$g['nama'] }}</option>
-                      @endforeach
-                      @endforeach
-                    </select>
+                    <input class="be-form" type="text" name="provinsi_verif" id="provinsi_verif" placeholder="Masukkan Nama Provinsi">
                 </div>
                 <div class="form-column">
                     <label for="" class="be-form-label mb-1 mt-2">Jenis Perumahan</label>
@@ -263,11 +263,7 @@
                 </div>
                 <div class="form-column">
                     <label for="" class="be-form-label mb-1 mt-2">Kelurahan</label>
-                    <select name="kelurahan_verif" id="kelurahan_verif" class="be-form">
-                        <option value="">Current</option>
-                        <option value="asdsa">Option 1</option>
-                        <option value="saddas">Option 2</option>
-                    </select>
+                    <input class="be-form" type="text" name="kelurahan_verif" id="kelurahan_verif" placeholder="Masukkan Kelurahan">
                 </div>
                 <div class="form-column">
                     <label for="" class="be-form-label mb-1 mt-2">Tanggal Terbit IMB</label>
@@ -275,27 +271,19 @@
                 </div>
                 <div class="form-column">
                     <label for="" class="be-form-label mb-1 mt-2">Kecamatan</label>
-                    <select name="kecamatan_verif" id="kecamatan_verif" class="be-form">
-                        <option value="">Current</option>
-                        <option value="sadsad">Option 1</option>
-                        <option value="sadas">Option 2</option>
-                    </select>
+                    <input class="be-form" type="text" name="kecamatan_verif" id="kecamatan_verif" placeholder="Masukkan Nama Kecamatan">
                 </div>
                 <div class="form-column">
                     <label for="" class="be-form-label mb-1 mt-2">PDF IMB Asli (Berwarna)</label>
                     <input class="be-form" type="file" name="pdfIMB_verif" id="pdfIMB_verif" placeholder="Masukkan PDF IMB Asli (Berwarna)">
                 </div>
                 <div class="form-column">
-                    <label for="" class="be-form-label mb-1 mt-2">Kabupaten/Kota</label>
-                    <select name="kota_verif" id="kota_verif" class="be-form">
-                        <option value="">Current</option>
-                        <option value="asdasd">Option 1</option>
-                        <option value="asdsadas">Option 2</option>
-                    </select>
+                    <label for="" class="be-form-label mb-1 mt-2">Kota/Kabupaten</label>
+                    <input class="be-form" type="text" name="kota_verif" id="kota_verif" placeholder="Masukkan Nama Kota/Kabupaten">
                 </div>
                 <div class="form-column">
                     <label for="" class="be-form-label mb-1 mt-2">Foto Siteplan</label>
-                    <input class="be-form" type="file" name="" id="" placeholder="Masukkan Foto Siteplan">
+                    <input class="be-form" type="file" name="siteplan_verif" id="siteplan_verif" placeholder="Masukkan Foto Siteplan">
                 </div>
             </div>
             <div class="button-bar w-75">
@@ -304,6 +292,7 @@
                 <!-- <button class="nextBtn bg-purple btn-fill ftc" type="button" >SIMPAN</button> -->
             </div>
         </div>
+        </form>
     </form>
 
     

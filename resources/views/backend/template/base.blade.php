@@ -38,7 +38,7 @@
     </div>
     <div class="be-main">
         <div class="welcome-text mb-1">
-            Halo, 
+            Halo,
             <b>{{Session::get('instansi')}}!</b>
             <br>Selamat Datang Di Dashboard Pengembang 
             <b>PAKASEP</b>
@@ -117,12 +117,17 @@
                $.getJSON('/pengembang/dataKota/'+$('#provinsi_dok').val(), 
                function(data){
                     $('#kota_dok').find('option').remove();
+                   
                     $.each(data, function(title,arrayKota){
                         $.each(arrayKota, function(i,j){
                             $( "#kota_dok" ).prop( "disabled", false )
                             $('#kota_dok').append(new Option(j['nama'],j['id']))
+                            $('#kota_verif').val($('#kota_dok option:selected').text())
+                            $( "#kota_verif" ).prop( "disabled", true )
+                           
                         });
                     })
+                    
                });
                
             });
@@ -139,6 +144,8 @@
                         $.each(arrayKecamatan, function(k,t){
                             $( "#kecamatan_dok" ).prop( "disabled", false )
                             $('#kecamatan_dok').append(new Option(t['nama'],t['id']))
+                            $('#kecamatan_verif').val($('#kecamatan_dok option:selected').text())
+                            $( "#kecamatan_verif" ).prop( "disabled", true )
                         });
                     })
                });
@@ -156,11 +163,23 @@
                         $.each(arrayKelurahan, function(k,l){
                             $( "#kelurahan_dok" ).prop( "disabled", false )
                             $('#kelurahan_dok').append(new Option(l['nama'],l['id']))
+                            $('#kelurahan_verif').val($('#kelurahan_dok option:selected').text())
+                            $( "#kelurahan_verif" ).prop( "disabled", true )
                         });
                     })
                });
                
             });
+
+            $('#provinsi_dok').change(function(){
+                $('#provinsi_verif').val($('#provinsi_dok option:selected').text());
+                $( "#provinsi_verif" ).prop( "disabled", true );
+            });
+            $('#pdfIMB_dok').change(function(){
+                $('#pdfIMB_verif').val($('#pdfIMB_dok').val());
+            });
+
+            
         } );
     </script>
 
@@ -218,12 +237,10 @@
             document.getElementById("kelurahan_dok").disabled = true;
             document.getElementById("kelurahan_dok").value = "";
         }
+
         function getValueDokToVerif(){
             document.getElementById("namaPerumahan_verif").value = 
             document.getElementById("namaPerumahan_dok").value;
-
-            document.getElementById("provinsi_verif").value = 
-            document.getElementById("provinsi_dok").value;
 
             document.getElementById("jenisPerumahan_verif").value = 
             document.getElementById("jenisPerumahan_dok").value;
@@ -237,23 +254,14 @@
             document.getElementById("nik_verif").value = 
             document.getElementById("nik_dok").value;
 
-            document.getElementById("kelurahan_verif").value = 
-            document.getElementById("kelurahan_dok").value;
 
             document.getElementById("tanggalIMB_verif").value = 
             document.getElementById("tanggalIMB_dok").value;
 
-            document.getElementById("kecamatan_verif").value = 
-            document.getElementById("kecamatan_dok").value;
-
-            document.getElementById("pdfIMB_verif").value = 
-            document.getElementById("pdfIMB_dok").value;
-
-            document.getElementById("kota_verif").value = 
-            document.getElementById("kota_dok").value;
 
    
         }
+       
     </script>
 </body>
 </html>
