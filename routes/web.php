@@ -46,7 +46,17 @@ Route::prefix('/bank')->group(function () {
 Route::prefix('/pengembang')->group(function () {
     Route::get('/edit-perumahan', [PengembangController::class, 'editPerumahan'])->name('pengembang-edit');
     Route::get('/data-perumahan', [PengembangController::class, 'dataPerumahan'])->name('pengembang-perumahan');
-    Route::get('/pengajuan-perumahan', [PengembangController::class, 'pengajuanPerumahan'])->name('pengembang-pengajuan');
+    Route::prefix('/pengajuan-perumahan')->group(function (){
+        // Route::get('/pengajuan-perumahan', [PengembangController::class, 'pengajuanPerumahan'])->name('pengembang-pengajuan');
+        Route::get('/step-1', [PengembangController::class, 'pengajuanDataRumah'])->name('step-1');
+        Route::post('/data-rumah', [PengembangController::class, 'postDataRumah'])->name('post-1');
+        Route::get('/step-2', [PengembangController::class, 'pengajuanDokumen'])->name('step-2');
+        Route::post('/dokumen', [PengembangController::class, 'postDokumen'])->name('post-2');
+        Route::get('/step-3', [PengembangController::class, 'pengajuanFoto'])->name('step-3');
+        Route::post('/post-step3', [PengembangController::class, 'postFoto'])->name('post-3');
+        Route::get('/step-4', [PengembangController::class, 'pengajuanVerifikasi'])->name('step-4');
+        Route::post('/post-step4', [PengembangController::class, 'postVerifikasi'])->name('post-4');
+    });
     Route::get('/profil-pengembang', [PengembangController::class, 'profil'])->name('pengembang-profil');
     Route::get('/status-pengajuan', [PengembangController::class, 'statusPengajuan'])->name('pengembang-status');
     Route::get('/dataKota/{id}', [PengembangController::class, 'kota'])->name('kota');

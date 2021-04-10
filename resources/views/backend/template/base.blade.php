@@ -19,7 +19,7 @@
             <hr>
             <li><a href="{{ route('pengembang-perumahan') }}">DATA PERUMAHAN</a></li>
             <hr>
-            <li><a href="{{ route('pengembang-pengajuan') }}">AJUKAN PERUMAHAN</a></li>
+            <li><a href="{{ route('step-1') }}">AJUKAN PERUMAHAN</a></li>
             <hr>
             <li><a href="{{ route('pengembang-status') }}">STATUS PENGAJUAN</a></li>
         </ul>
@@ -48,6 +48,7 @@
         @yield('content')
         <div class="foot mt-5">© 2021 — <b>PAKASEP</b> Dashboard untuk BANK (versi 1.0)</div>
     </div>
+    
     <script>
         $(document).ready(function() {
             $('#dataPengajuanNasabah').DataTable();
@@ -77,7 +78,7 @@
             allNextBtn.click(function(){
                 var curStep = $(this).closest(".setup-content"),
                     curStepBtn = curStep.attr("id"),
-                    nextStepWizard = $('div.setup-panel div a[href="#' + curStepBtn + '"]').parent().next().children("a"),
+                    nextStepWizard = $('div.setup-panel div a[href="/' + curStepBtn + '"]').parent().next().children("a"),
                     curInputs = curStep.find("input[type='text'],input[type='url']"),
                     isValid = true;
 
@@ -183,85 +184,82 @@
         } );
     </script>
 
-<script>
-        function getValue(){
-            document.getElementById("namaTipe_verif").value = 
-            document.getElementById("namaTipe_rumah").value;
+    <script>
+            function getValue(){
+                document.getElementById("namaTipe_verif").value = 
+                document.getElementById("namaTipe_rumah").value;
 
-            document.getElementById("kamarMandi_verif").value = 
-            document.getElementById("kamarMandi_rumah").value;
+                document.getElementById("kamarMandi_verif").value = 
+                document.getElementById("kamarMandi_rumah").value;
 
-            document.getElementById("harga_verif").value = 
-            document.getElementById("harga_rumah").value;
+                document.getElementById("harga_verif").value = 
+                document.getElementById("harga_rumah").value;
 
-            document.getElementById("teknisAtap_verif").value = 
-            document.getElementById("teknisAtap_rumah").value;
+                document.getElementById("teknisAtap_verif").value = 
+                document.getElementById("teknisAtap_rumah").value;
 
-            document.getElementById("luasLahan_verif").value = 
-            document.getElementById("luasLahan_rumah").value;
+                document.getElementById("luasLahan_verif").value = 
+                document.getElementById("luasLahan_rumah").value;
 
-            document.getElementById("teknisDinding_verif").value = 
-            document.getElementById("teknisDinding_rumah").value;
+                document.getElementById("teknisDinding_verif").value = 
+                document.getElementById("teknisDinding_rumah").value;
 
-            document.getElementById("luasBangunan_verif").value = 
-            document.getElementById("luasBangunan_rumah").value;
+                document.getElementById("luasBangunan_verif").value = 
+                document.getElementById("luasBangunan_rumah").value;
 
-            document.getElementById("teknisLantai_verif").value = 
-            document.getElementById("teknisLantai_rumah").value;
+                document.getElementById("teknisLantai_verif").value = 
+                document.getElementById("teknisLantai_rumah").value;
 
-            document.getElementById("kamarTidur_verif").value = 
-            document.getElementById("kamarTidur_rumah").value;
+                document.getElementById("kamarTidur_verif").value = 
+                document.getElementById("kamarTidur_rumah").value;
 
-            document.getElementById("teknikPondasi_verif").value = 
-            document.getElementById("teknisDinding_rumah").value;
+                document.getElementById("teknikPondasi_verif").value = 
+                document.getElementById("teknisDinding_rumah").value;
 
-   
-        }
-        function formDisProv(){
-            document.getElementById("kelurahan_dok").disabled = true;
-            document.getElementById("kecamatan_dok").disabled = true;
-            document.getElementById("kota_dok").disabled = true;
+    
+            }
+            function formDisProv(){
+                document.getElementById("kelurahan_dok").disabled = true;
+                document.getElementById("kecamatan_dok").disabled = true;
+                document.getElementById("kota_dok").disabled = true;
 
-            document.getElementById("kelurahan_dok").value = "";
-            document.getElementById("kecamatan_dok").value = "";
-            document.getElementById("kota_dok").value = "";
-        }
-        function formDisKota(){
-            document.getElementById("kecamatan_dok").disabled = true;
-            document.getElementById("kelurahan_dok").disabled = true;
+                document.getElementById("kelurahan_dok").value = "";
+                document.getElementById("kecamatan_dok").value = "";
+                document.getElementById("kota_dok").value = "";
+            }
+            function formDisKota(){
+                document.getElementById("kecamatan_dok").disabled = true;
+                document.getElementById("kelurahan_dok").disabled = true;
 
-            document.getElementById("kelurahan_dok").value = "";
-            document.getElementById("kecamatan_dok").value = "";
-        }
-        function formDisKec(){
-            document.getElementById("kelurahan_dok").disabled = true;
-            document.getElementById("kelurahan_dok").value = "";
-        }
+                document.getElementById("kelurahan_dok").value = "";
+                document.getElementById("kecamatan_dok").value = "";
+            }
+            function formDisKec(){
+                document.getElementById("kelurahan_dok").disabled = true;
+                document.getElementById("kelurahan_dok").value = "";
+            }
 
-        function getValueDokToVerif(){
-            document.getElementById("namaPerumahan_verif").value = 
-            document.getElementById("namaPerumahan_dok").value;
+            function getValueDokToVerif(){
+                document.getElementById("namaPerumahan_verif").value = 
+                document.getElementById("namaPerumahan_dok").value;
 
-            document.getElementById("jenisPerumahan_verif").value = 
-            document.getElementById("jenisPerumahan_dok").value;
+                document.getElementById("jenisPerumahan_verif").value = 
+                document.getElementById("jenisPerumahan_dok").value;
 
-            document.getElementById("nomorIMB_verif").value = 
-            document.getElementById("nomorIMB_dok").value;
+                document.getElementById("nomorIMB_verif").value = 
+                document.getElementById("nomorIMB_dok").value;
 
-            document.getElementById("alamatPerumahan_verif").value = 
-            document.getElementById("alamatPerumahan_dok").value;
+                document.getElementById("alamatPerumahan_verif").value = 
+                document.getElementById("alamatPerumahan_dok").value;
 
-            document.getElementById("nik_verif").value = 
-            document.getElementById("nik_dok").value;
-
-
-            document.getElementById("tanggalIMB_verif").value = 
-            document.getElementById("tanggalIMB_dok").value;
+                document.getElementById("nik_verif").value = 
+                document.getElementById("nik_dok").value;
 
 
-   
-        }
-       
-    </script>
-</body>
+                document.getElementById("tanggalIMB_verif").value = 
+                document.getElementById("tanggalIMB_dok").value;
+            }
+        
+        </script>
+    </body>
 </html>

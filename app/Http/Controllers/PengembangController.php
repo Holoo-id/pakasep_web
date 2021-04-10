@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\PengajuanPerumahan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use GuzzleHttp\Stream\Stream;
@@ -38,8 +39,9 @@ class PengembangController extends Controller
     {
         return view('backend.pengembang.profil');
     }
-    public function statusPengajuan()
+    public function statusPengajuan(Request $request)
     {
+        $request->session()->forget('pengajuanPerumahan');
         return view('backend.pengembang.status_pengajuan');
     }
 
@@ -79,9 +81,6 @@ class PengembangController extends Controller
             'fotoDalamRumah' => $firebase_storage_path,
             'fotoJalan' => $firebase_storage_path,
             'fotoGerbangPerumahan' => $firebase_storage_path
-           
-            
-
         ]);
         $gambar = $request->fotoDepanRumah;
         $gambar2 = $request->fotoDalamRumah;
@@ -190,4 +189,99 @@ class PengembangController extends Controller
         unlink($localfolder . $file);
         unlink($localfolder2 . $file2);
     }
+
+    // PENGAJUAN WAS HERE
+        // STEP 1
+            public function pengajuanDataRumah(Request $request)
+            {
+                $pengajuanPerumahan = $request->session()->get('pengajuanPerumahan');
+                $tipeRumah = $request->namaTipe_rumah;
+                return view('backend.pengembang.pengajuan.step-1',compact('pengajuanPerumahan', 'tipeRumah'));
+            }
+            public function postDataRumah(Request $request)
+            {
+                $validasi = $request->validate([
+                    'namaTipe_rumah' => 'required',
+                    'kamarMandi_rumah' => 'required|numeric',
+                    'harga_rumah' => 'required|numeric',
+                    'teknisAtap_rumah' => 'required',
+                    'luasLahan_rumah' => 'required|numeric',
+                    'teknisDinding_rumah' => 'required',
+                    'luasBangunan_rumah' => 'required|numeric',
+                    'teknisLantai_rumah' => 'required',
+                    'kamarTidur_rumah' => 'required|numeric',
+                    'teknisPondasi_rumah' => 'required',
+                ]);
+                if(empty($request->session()->get('pengajuanPerumahan'))){
+                    $pengajuanPerumahan = new PengajuanPerumahan();
+                    $pengajuanPerumahan->fill($validasi);
+                    $request->session()->put('pengajuanPerumahan', $pengajuanPerumahan);
+                }else{
+                    $pengajuanPerumahan = $request->session()->get('pengajuanPerumahan');
+                    $pengajuanPerumahan->fill($validasi);
+                    $request->session()->put('pengajuanPerumahan', $pengajuanPerumahan);
+                }
+                return redirect(route('step-2'));
+            }
+        // STEP 2
+            public function pengajuanDokumen(Request $request)
+            {
+                $response = Http::get('https://dev.farizdotid.com/api/daerahindonesia/provinsi');
+                $rest = Http::get('https://dev.farizdotid.com/api/daerahindonesia/provinsi');
+                $provinsi = $response->json();
+                $getIdProvinsi = $response->json();
+                return view('backend.pengembang.pengajuan.step-2',compact('provinsi'));
+            }
+            public function postDokumen(Request $request)
+            {
+                $validasi = $request->validate([
+                    'namaPerumahan_dok' => 'required',
+                    'provinsi_dok' => 'required',
+                    'jenisPerumahan_dok' => 'required',
+                    'nomorIMB_dok' => 'required|numeric',
+                    'alamatPerumahan_dok' => 'required',
+                    'nik_dok' => 'required|numeric',
+                    'kelurahan_dok' => 'required',
+                    'tanggalIMB_dok' => 'required|date',
+                    'kecamatan_dok' => 'required',
+                    'pdfIMB_dok' => 'required',
+                    'kota_dok' => 'required',
+                    'siteplan_dok' => 'required',
+                ]);
+                if(empty($request->session()->get('pengajuanPerumahan'))){
+                    $pengajuanPerumahan = new PengajuanPerumahan();
+                    $pengajuanPerumahan->fill($validasi);
+                    $request->session()->put('pengajuanPerumahan', $pengajuanPerumahan);
+                }else{
+                    $pengajuanPerumahan = $request->session()->get('pengajuanPerumahan');
+                    $pengajuanPerumahan->fill($validasi);
+                    $request->session()->put('pengajuanPerumahan', $pengajuanPerumahan);
+                }
+                return redirect(route('step-3'));
+            }
+        // STEP 3
+            public function pengajuanFoto(Request $request)
+            {
+                return view('backend.pengembang.pengajuan.step-3');
+            }
+            public function postFoto(Request $request)
+            {
+                $validasi = $request->validate([
+                    'fotoDepanRumah' => 'required',
+                    'fotoDalamRumah' => 'required',
+                    'fotoJalan' => 'required',
+                    'fotoGerbangPerumahan' => 'required',
+                ]);
+                return redirect(route('step-4'));
+            }
+        // STEP 4
+            public function pengajuanVerifikasi(Request $request)
+            {
+                $pengajuanPerumahan = $request->session()->get('pengajuanPerumahan');
+                return view('backend.pengembang.pengajuan.step-4', compact('pengajuanPerumahan'));
+            }
+            public function postVerifikasi(Request $request)
+            {
+                return redirect(route('pengembang-status'));
+            }
 }
