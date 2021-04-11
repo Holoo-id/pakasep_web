@@ -52,7 +52,13 @@
             </div>
             <div class="form-column">
                 <label for="" class="be-form-label mb-1 mt-2">Provinsi</label>
-                <input class="be-form" type="text" name="provinsi_verif" id="provinsi_verif" placeholder="Masukkan Nama Provinsi" value="{{ $pengajuanPerumahan->provinsi_dok }}" readonly="readonly">
+                @foreach($provinsi as $prov)
+                    @foreach($prov as $p)
+                        @if($p['id'] == $pengajuanPerumahan->provinsi_dok)
+                            <input class="be-form" type="text" name="provinsi_verif" id="provinsi_verif" value="{{ $p['nama'] }}" placeholder="Masukkan Nama Provinsi" readonly="readonly">
+                        @endif
+                    @endforeach
+                @endforeach
             </div>
             <div class="form-column">
                 <label for="" class="be-form-label mb-1 mt-2">Jenis Perumahan</label>
@@ -76,7 +82,13 @@
             </div>
             <div class="form-column">
                 <label for="" class="be-form-label mb-1 mt-2">Kelurahan</label>
-                <input class="be-form" type="text" name="kelurahan_verif" id="kelurahan_verif" placeholder="Masukkan Kelurahan" value="{{ $pengajuanPerumahan->kelurahan_dok }}" readonly="readonly">
+                @foreach($kelurahan as $klrhn)
+                    @foreach($klrhn as $kl)
+                        @if($kl['id'] == $pengajuanPerumahan->kelurahan_dok)
+                            <input class="be-form" type="text" name="kelurahan_verif" id="kelurahan_verif" placeholder="Masukkan Kelurahan" value="{{ $kl['nama'] }}" readonly="readonly">
+                        @endif
+                    @endforeach
+                @endforeach
             </div>
             <div class="form-column">
                 <label for="" class="be-form-label mb-1 mt-2">Tanggal Terbit IMB</label>
@@ -84,7 +96,13 @@
             </div>
             <div class="form-column">
                 <label for="" class="be-form-label mb-1 mt-2">Kecamatan</label>
-                <input class="be-form" type="text" name="kecamatan_verif" id="kecamatan_verif" placeholder="Masukkan Nama Kecamatan" value="{{ $pengajuanPerumahan->kecamatan_dok }}" readonly="readonly">
+                @foreach($kecamatan as $kcmtn)
+                    @foreach($kcmtn as $kc)
+                        @if($kc['id'] == $pengajuanPerumahan->kecamatan_dok)
+                            <input class="be-form" type="text" name="kecamatan_verif" id="kecamatan_verif" placeholder="Masukkan Nama Kecamatan" value="{{ $kc['nama'] }}" readonly="readonly">
+                        @endif
+                    @endforeach
+                @endforeach
             </div>
             <div class="form-column">
                 <label for="" class="be-form-label mb-1 mt-2">PDF IMB Asli (Berwarna)</label>
@@ -92,14 +110,20 @@
             </div>
             <div class="form-column">
                 <label for="" class="be-form-label mb-1 mt-2">Kota/Kabupaten</label>
-                <input class="be-form" type="text" name="kota_verif" id="kota_verif" placeholder="Masukkan Nama Kota/Kabupaten" value="{{ $pengajuanPerumahan->kota_dok }}" readonly="readonly">
+                @foreach($kota as $kta)
+                    @foreach($kta as $kt)
+                        @if($kt['id'] == $pengajuanPerumahan->kota_dok)
+                            <input class="be-form" type="text" name="kota_verif" id="kota_verif" placeholder="Masukkan Nama Kota/Kabupaten" value="{{ $kt['nama'] }}" readonly="readonly">
+                        @endif
+                    @endforeach
+                @endforeach
             </div>
             <div class="form-column">
                 <label for="" class="be-form-label mb-1 mt-2">Foto Siteplan</label>
                 <input class="be-form" type="file" name="siteplan_verif" id="siteplan_verif" placeholder="Masukkan Foto Siteplan" value="{{ $pengajuanPerumahan->siteplan_dok }}" readonly="readonly">
             </div>
         </div>
-        <div class="button-bar">
+        <div class="button-bar w-full">
             <button class="prevBtn bg-purple btn-fill ftc" type="button" >KEMBALI</button>
             <input type="submit" value="AJUKAN" class="bg-purple btn-fill ftc">
             <!-- <button class="nextBtn bg-purple btn-fill ftc" type="button" >SIMPAN</button> -->

@@ -153,6 +153,12 @@ footer {
   width: fit-content;
 }
 
+.error-text {
+  color: #FF5756;
+  font-size: 0.85em;
+  line-height: 1.5em;
+}
+
 .filter-prefix {
   font-weight: 600;
   font-size: 24px;
@@ -1135,6 +1141,11 @@ input[type=search] {
   padding: 1rem;
   text-align: center;
   width: 70px;
+}
+
+.circle-button[disabled] {
+  cursor: default;
+  pointer-events: none;
 }
 
 .dt-g-btn {
