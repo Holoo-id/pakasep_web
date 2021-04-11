@@ -33,7 +33,7 @@
             </div>
         </div>
         <div class="button-bar w-75">
-            <button class="prevBtn bg-purple btn-fill ftc" type="button" >KEMBALI</button>
+            <a href="{{ route('step-2') }}" class="prevBtn bg-purple btn-fill ftc" type="button" >KEMBALI</a>
             <button class="nextBtn bg-purple btn-fill ftc" type="submit"  formenctype="multipart/form-data" >SIMPAN</button>
         </div>
     </form>

@@ -62,7 +62,7 @@ Route::prefix('/pengembang')->group(function () {
     Route::get('/dataKota/{id}', [PengembangController::class, 'kota'])->name('kota');
     Route::get('/dataKecamatan/{id}', [PengembangController::class, 'kecamatan'])->name('kecamatan');
     Route::get('/dataKelurahan/{id}', [PengembangController::class, 'kelurahan'])->name('kelurahan');
-    Route::post('/pengajuan-perumahan', [PengembangController::class, 'uploadImage'])->name('images');
-    Route::post('/tambahRumah', [PengembangController::class, 'store'])->name('rumah');
+    // Route::post('/pengajuan-perumahan', [PengembangController::class, 'uploadImage'])->name('images');
+    // Route::post('/tambahRumah', [PengembangController::class, 'store'])->name('rumah');
     
 });

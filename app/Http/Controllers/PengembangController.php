@@ -226,11 +226,13 @@ class PengembangController extends Controller
         // STEP 2
             public function pengajuanDokumen(Request $request)
             {
+                $pengajuanPerumahan = $request->session()->get('pengajuanPerumahan');
                 $response = Http::get('https://dev.farizdotid.com/api/daerahindonesia/provinsi');
                 $rest = Http::get('https://dev.farizdotid.com/api/daerahindonesia/provinsi');
                 $provinsi = $response->json();
                 $getIdProvinsi = $response->json();
-                return view('backend.pengembang.pengajuan.step-2',compact('provinsi'));
+                $jenisPerumahan = ['Jenis 1', 'Perumahan 2', 'Jenis Perumahan 3'];
+                return view('backend.pengembang.pengajuan.step-2',compact('pengajuanPerumahan', 'provinsi', 'jenisPerumahan'));
             }
             public function postDokumen(Request $request)
             {
@@ -294,7 +296,7 @@ class PengembangController extends Controller
                 $nama3 = $request->txtFotoJalan;
                 $nama4 = $request->txtFotoGerbangPerumahan;
 
-                $localfolder = public_path('images') .'/';
+                $localfolder = public_path('images') .'\\';
 
                 $extension = $gambar->getClientOriginalExtension();
                 $extension2 = $gambar2->getClientOriginalExtension();

@@ -62,11 +62,7 @@
             </div>
             <div class="form-column">
                 <label for="" class="be-form-label mb-1 mt-2">Jenis Perumahan</label>
-                <select name="jenisPerumahan_verif" id="jenisPerumahan_verif" class="be-form">
-                    <option value="">Current</option>
-                    <option value="">Option 1</option>
-                    <option value="">Option 2</option>
-                </select>
+                <input class="be-form" type="text" name="jenisPerumahan_verif" id="jenisPerumahan_verif" placeholder="Masukkan Nama Perumahan" value="{{ $pengajuanPerumahan->jenisPerumahan_dok }}" readonly="readonly">
             </div>
             <div class="form-column">
                 <label for="" class="be-form-label mb-1 mt-2">Nomor IMB Induk (Kolektif)</label>
@@ -106,7 +102,7 @@
             </div>
             <div class="form-column">
                 <label for="" class="be-form-label mb-1 mt-2">PDF IMB Asli (Berwarna)</label>
-                <input class="be-form" type="file" name="pdfIMB_verif" id="pdfIMB_verif" placeholder="Masukkan PDF IMB Asli (Berwarna)" value="{{ $pengajuanPerumahan->pdfIMB_dok }}" readonly="readonly">
+                <input class="be-form" type="file" name="pdfIMB_verif" id="pdfIMB_verif" accept="application/pdf" placeholder="Masukkan PDF IMB Asli (Berwarna)" value="{{ $pengajuanPerumahan->pdfIMB_dok }}" readonly="readonly">
             </div>
             <div class="form-column">
                 <label for="" class="be-form-label mb-1 mt-2">Kota/Kabupaten</label>
@@ -120,7 +116,7 @@
             </div>
             <div class="form-column">
                 <label for="" class="be-form-label mb-1 mt-2">Foto Siteplan</label>
-                <input class="be-form" type="file" name="siteplan_verif" id="siteplan_verif" placeholder="Masukkan Foto Siteplan" value="{{ $pengajuanPerumahan->siteplan_dok }}" readonly="readonly">
+                <input class="be-form" type="file" name="siteplan_verif" id="siteplan_verif" accept="image/*" placeholder="Masukkan Foto Siteplan" value="{{ $pengajuanPerumahan->siteplan_dok }}" readonly="readonly">
             </div>
         </div>
         <div class="button-bar w-full">
