@@ -22,6 +22,7 @@ use App\Http\Controllers\RumahController;
 
 Route::get('/post', 'App\Http\Controllers\RumahController@post');
 Route::get('/login/pengembang', 'App\Http\Controllers\LoginController@index');
+Route::get('/register/pengembang', 'App\Http\Controllers\LoginController@register');
 Route::get('/auth', 'App\Http\Controllers\LoginController@auth');
 
 Route::post('/admin/tambah', 'App\Http\Controllers\RumahController@store');
@@ -52,12 +53,12 @@ Route::prefix('/pengembang')->group(function () {
         Route::post('/data-rumah', [PengembangController::class, 'postDataRumah'])->name('post-1');
         Route::get('/step-2', [PengembangController::class, 'pengajuanDokumen'])->name('step-2');
         Route::post('/dokumen', [PengembangController::class, 'postDokumen'])->name('post-2');
-        Route::get('/step-3', [PengembangController::class, 'pengajuanFoto'])->name('step-3');
-        Route::post('/post-step3', [PengembangController::class, 'postFoto'])->name('post-3');
-        Route::get('/step-4', [PengembangController::class, 'pengajuanVerifikasi'])->name('step-4');
+        Route::post('/post-step3', [PengembangController::class, 'uploadImage'])->name('post-3');
+        Route::get('/step-3', [PengembangController::class, 'pengajuanVerifikasi'])->name('step-3');
         Route::post('/post-step4', [PengembangController::class, 'postVerifikasi'])->name('post-4');
     });
     Route::get('/profil-pengembang', [PengembangController::class, 'profil'])->name('pengembang-profil');
+    Route::get('/date', [PengembangController::class, 'date'])->name('date');
     Route::get('/status-pengajuan', [PengembangController::class, 'statusPengajuan'])->name('pengembang-status');
     Route::get('/dataKota/{id}', [PengembangController::class, 'kota'])->name('kota');
     Route::get('/dataKecamatan/{id}', [PengembangController::class, 'kecamatan'])->name('kecamatan');

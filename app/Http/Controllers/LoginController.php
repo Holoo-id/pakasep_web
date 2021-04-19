@@ -22,7 +22,12 @@ class LoginController extends Controller
             if ($getEmail && Hash::check($password, $ge->data()['Kata Sandi'])) {
                 Session::put('instansi',$ge->data()['Instansi']);
                 Session::put('id',$ge->id());
-                return redirect('/pengembang/pengajuan-perumahan');
+                Session::put('email',$ge->data()['Email']);
+                Session::put('nama',$ge->data()['Nama Lengkap']);
+                Session::put('noktp',$ge->data()['No KTP']);
+                Session::put('telepon',$ge->data()['Telepon']);
+                Session::put('website',$ge->data()['Website']);
+                return redirect(route('pengembang-profil'));
         }else{
             echo"gagal";
         }
@@ -30,5 +35,8 @@ class LoginController extends Controller
     
         
        
+    }
+    public function register(){
+        return view('b.register');
     }
 }

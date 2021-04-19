@@ -1,7 +1,7 @@
 @extends('backend.pengembang.pengajuan_perumahan')
 @section('form')
-    <form action="{{ route('post-3') }}" method="post" class="setup-content" id="step-3">
-        @csrf
+    
+       
         <div class="grid grid-4col w-full mb-5">
             <img id="fotoDepan" alt="Preview - Foto Tampak Depan" class="be-preview-image">
             <img id="fotoDalam" alt="Preview - Foto Tampak Dalam Rumah" class="be-preview-image">
@@ -36,5 +36,5 @@
             <a href="{{ route('step-2') }}" class="prevBtn bg-purple btn-fill ftc" type="button" >KEMBALI</a>
             <button class="nextBtn bg-purple btn-fill ftc" type="submit"  formenctype="multipart/form-data" >SIMPAN</button>
         </div>
-    </form>
+    
 @endsection

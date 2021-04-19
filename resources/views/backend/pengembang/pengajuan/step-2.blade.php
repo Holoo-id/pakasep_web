@@ -76,11 +76,7 @@
                 </select>
                 <p class="error-text pv-1" style="color: #FF5756;  font-size: 0.85em;line-height: 1.5em;">{{ $errors->first('kecamatan_dok') }}</p>
             </div>
-            <div class="form-column">
-                <label for="" class="be-form-label mb-1 mt-2">PDF IMB Asli (Berwarna)</label>
-                <input class="be-form" type="file" name="pdfIMB_dok" id="pdfIMB_dok" placeholder="Masukkan PDF IMB Asli (Berwarna)" accept="application/pdf">
-                <p class="error-text pv-1" style="color: #FF5756;  font-size: 0.85em;line-height: 1.5em;">{{ $errors->first('pdfIMB_dok') }}</p>
-            </div>
+           
             <div class="form-column">
                 <label for="" class="be-form-label mb-1 mt-2">Kelurahan</label>
                 <select name="kelurahan_dok" id="kelurahan_dok" class="be-form">
@@ -90,12 +86,7 @@
                 </select>
                 <p class="error-text pv-1" style="color: #FF5756;  font-size: 0.85em;line-height: 1.5em;">{{ $errors->first('kelurahan_dok') }}</p>
             </div>
-            <div class="form-column">
-                <label for="" class="be-form-label mb-1 mt-2">Foto Siteplan</label>
-                <input class="be-form" type="file" name="siteplan_dok" id="siteplan_dok" placeholder="Masukkan Foto Siteplan" accept="image/*">
-                <p class="error-text pv-1" style="color: #FF5756;  font-size: 0.85em;line-height: 1.5em;">{{ $errors->first('siteplan_dok') }}</p>
-            </div>
-        </div>
+        
         <div class="button-bar w-75">
             <a href="{{ route('step-1') }}" class="prevBtn bg-purple btn-fill ftc" type="button" >KEMBALI</a>
             <!-- <button class="nextBtn bg-purple btn-fill ftc" id="btn" type="button" onclick="getValueDokToVerif()">SIMPAN</button> -->

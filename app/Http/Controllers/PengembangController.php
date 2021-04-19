@@ -16,9 +16,13 @@ class PengembangController extends Controller
     {
         return view('backend.pengembang.edit_perumahan');
     }
+   
     public function dataPerumahan()
     {
-        return view('backend.pengembang.data_perumahan');
+        $getData = app('firebase.firestore')->database()->collection('Rumah');
+        $getWhere = $getData->where('Id Pengembang','==',Session::get('id'));
+        $rumah = $getWhere->documents();
+        return view('backend.pengembang.data_perumahan',compact('rumah'));
     }
     public function pengajuanPerumahan(Request $request)
     {
@@ -37,6 +41,12 @@ class PengembangController extends Controller
     }
     public function profil()
     {
+        $getData = app('firebase.firestore')->database()->collection('Rumah');
+        $getWhere = $getData->where('Id Pengembang','==',Session::get('id'));
+        $rumah = $getWhere->documents()->rows();
+        
+    
+
         return view('backend.pengembang.profil');
     }
     public function statusPengajuan(Request $request)
@@ -69,62 +79,7 @@ class PengembangController extends Controller
 
         return $kelurahan;
     }
-    public function uploadImage(Request $request ){
-        $firebase_storage_path = 'images/';
-
-        
-        $rumah = app('firebase.firestore')->database()->collection('GambarRumahPengembang')->newDocument();
-        $rumah->set([
-            'idPengembang' => Session::get('id'),
-            'Instansi'  => Session::get('instansi'),
-            'fotoDepanRumah' => $firebase_storage_path,
-            'fotoDalamRumah' => $firebase_storage_path,
-            'fotoJalan' => $firebase_storage_path,
-            'fotoGerbangPerumahan' => $firebase_storage_path
-        ]);
-        $gambar = $request->fotoDepanRumah;
-        $gambar2 = $request->fotoDalamRumah;
-        $gambar3 = $request->fotoJalan;
-        $gambar4 = $request->fotoGerbangPerumahan;
-
-        $nama = $request->txtFotoDepanRumah;
-        $nama2 = $request->txtFotoDalamRumah;
-        $nama3 = $request->txtFotoJalan;
-        $nama4 = $request->txtFotoGerbangPerumahan;
-
-        $localfolder = public_path('images') .'/';
-
-        $extension = $gambar->getClientOriginalExtension();
-        $extension2 = $gambar2->getClientOriginalExtension();
-        $extension3 = $gambar3->getClientOriginalExtension();
-        $extension4 = $gambar4->getClientOriginalExtension();
-
-        $file      = $nama. '.' . $extension;
-        $file2      = $nama2. '.' . $extension2;
-        $file3      = $nama3. '.' . $extension3;
-        $file4     = $nama4. '.' . $extension4;
-
-        $gambar->move($localfolder, $file);
-        $gambar2->move($localfolder, $file2);
-        $gambar3->move($localfolder, $file3);
-        $gambar4->move($localfolder, $file4);
-
-        $uploadedfile = fopen($localfolder.$file, 'r');
-        $uploadedfile2 = fopen($localfolder.$file2, 'r');
-        $uploadedfile3 = fopen($localfolder.$file3, 'r');
-        $uploadedfile4 = fopen($localfolder.$file4, 'r');
-
-        app('firebase.storage')->getBucket()->upload($uploadedfile, ['nama' => $firebase_storage_path . $nama]);
-        app('firebase.storage')->getBucket()->upload($uploadedfile2, ['nama2' => $firebase_storage_path . $nama2]);
-        app('firebase.storage')->getBucket()->upload($uploadedfile3, ['nama3' => $firebase_storage_path . $nama3]);
-        app('firebase.storage')->getBucket()->upload($uploadedfile4, ['nama4' => $firebase_storage_path . $nama4]);
-
-        unlink($localfolder . $file);
-        unlink($localfolder . $file2);
-        unlink($localfolder . $file3);
-        unlink($localfolder . $file4);
-      
-    }
+   
     public function store(Request $request){
         $firebase_storage_path = 'application/'; 
         $firebase_storage_path_images = 'images/'; 
@@ -246,9 +201,7 @@ class PengembangController extends Controller
                     'kelurahan_dok' => 'required',
                     'tanggalIMB_dok' => 'required|date',
                     'kecamatan_dok' => 'required',
-                    'pdfIMB_dok' => 'required',
                     'kota_dok' => 'required',
-                    'siteplan_dok' => 'required',
                 ]);
                 if(empty($request->session()->get('pengajuanPerumahan'))){
                     $pengajuanPerumahan = new PengajuanPerumahan();
@@ -266,69 +219,7 @@ class PengembangController extends Controller
             {
                 return view('backend.pengembang.pengajuan.step-3');
             }
-            public function postFoto(Request $request)
-            {
-                $validasi = $request->validate([
-                    'fotoDepanRumah' => 'required',
-                    'fotoDalamRumah' => 'required',
-                    'fotoJalan' => 'required',
-                    'fotoGerbangPerumahan' => 'required',
-                ]);
-                $firebase_storage_path = 'images/';
-
-        
-                $rumah = app('firebase.firestore')->database()->collection('GambarRumahPengembang')->newDocument();
-                $rumah->set([
-                    'idPengembang' => Session::get('id'),
-                    'Instansi'  => Session::get('instansi'),
-                    'fotoDepanRumah' => $firebase_storage_path,
-                    'fotoDalamRumah' => $firebase_storage_path,
-                    'fotoJalan' => $firebase_storage_path,
-                    'fotoGerbangPerumahan' => $firebase_storage_path
-                ]);
-                $gambar = $request->fotoDepanRumah;
-                $gambar2 = $request->fotoDalamRumah;
-                $gambar3 = $request->fotoJalan;
-                $gambar4 = $request->fotoGerbangPerumahan;
-
-                $nama = $request->txtFotoDepanRumah;
-                $nama2 = $request->txtFotoDalamRumah;
-                $nama3 = $request->txtFotoJalan;
-                $nama4 = $request->txtFotoGerbangPerumahan;
-
-                $localfolder = public_path('images') .'\\';
-
-                $extension = $gambar->getClientOriginalExtension();
-                $extension2 = $gambar2->getClientOriginalExtension();
-                $extension3 = $gambar3->getClientOriginalExtension();
-                $extension4 = $gambar4->getClientOriginalExtension();
-
-                $file      = $nama. '.' . $extension;
-                $file2      = $nama2. '.' . $extension2;
-                $file3      = $nama3. '.' . $extension3;
-                $file4     = $nama4. '.' . $extension4;
-
-                $gambar->move($localfolder, $file);
-                $gambar2->move($localfolder, $file2);
-                $gambar3->move($localfolder, $file3);
-                $gambar4->move($localfolder, $file4);
-
-                $uploadedfile = fopen($localfolder.$file, 'r');
-                $uploadedfile2 = fopen($localfolder.$file2, 'r');
-                $uploadedfile3 = fopen($localfolder.$file3, 'r');
-                $uploadedfile4 = fopen($localfolder.$file4, 'r');
-
-                app('firebase.storage')->getBucket()->upload($uploadedfile, ['nama' => $firebase_storage_path . $nama]);
-                app('firebase.storage')->getBucket()->upload($uploadedfile2, ['nama2' => $firebase_storage_path . $nama2]);
-                app('firebase.storage')->getBucket()->upload($uploadedfile3, ['nama3' => $firebase_storage_path . $nama3]);
-                app('firebase.storage')->getBucket()->upload($uploadedfile4, ['nama4' => $firebase_storage_path . $nama4]);
-
-                unlink($localfolder . $file);
-                unlink($localfolder . $file2);
-                unlink($localfolder . $file3);
-                unlink($localfolder . $file4);
-                return redirect(route('step-4'));
-            }
+          
         // STEP 4
             public function pengajuanVerifikasi(Request $request)
             {
@@ -352,6 +243,7 @@ class PengembangController extends Controller
                 $rumah->set([
                     'Id Pengembang' => Session::get('id'),
                     'Instansi'  =>  Session::get('instansi'),
+                    'Tanggal'  =>  date('Y-m-d/H:i:s'),
                     'Nama Tipe Rumah' => $request->namaTipe_verif,
                     'Kamar Mandi' => $request->kamarMandi_verif,
                     'Harga' => $request->harga_verif,
@@ -374,10 +266,23 @@ class PengembangController extends Controller
                     'Kota' => $request->kota_verif,
                     'PDF IMB' => $firebase_storage_path,
                     'Foto Siteplan' => $firebase_storage_path_images,
+                    'fotoDepanRumah' => $firebase_storage_path_images,
+                    'fotoDalamRumah' => $firebase_storage_path_images,
+                    'fotoJalan' => $firebase_storage_path_images,
+                    'fotoGerbangPerumahan' => $firebase_storage_path_images
                 ]);
                 
                 $pdf = $request->pdfIMB_verif;
                 $siteplan = $request->siteplan_verif;
+                $fotoDepanRumah = $request->fotoDepanRumah;
+                $fotoDalamRumah = $request->fotoDalamRumah;
+                $fotoJalan = $request->fotoJalan;
+                $fotoGerbangPerumahan = $request->fotoGerbangPerumahan;
+
+                $nama1 = $request->txtFotoDepanRumah;
+                $nama2 = $request->txtFotoDalamRumah;
+                $nama3 = $request->txtFotoJalan;
+                $nama4 = $request->txtFotoGerbangPerumahan;
 
                 $rumah2 = app('firebase.firestore')->database()->collection('Rumah');
                 $getDataPengembang = $rumah2->where('Id Pengembang','==',Session::get('id'));
@@ -391,21 +296,51 @@ class PengembangController extends Controller
 
                 $extension = $pdf->getClientOriginalExtension();
                 $extension2 = $siteplan->getClientOriginalExtension();
+                $extension3 = $fotoDepanRumah->getClientOriginalExtension();
+                $extension4 = $fotoDalamRumah->getClientOriginalExtension();
+                $extension5 = $fotoJalan->getClientOriginalExtension();
+                $extension6 = $fotoGerbangPerumahan->getClientOriginalExtension();
 
                 $file      = $nama. '.' . $extension;
                 $file2     = $nama. '.' . $extension2;
+                $file3      = $nama1. '.' . $extension3;
+                $file4     = $nama2. '.' . $extension4;
+                $file5      = $nama3. '.' . $extension5;
+                $file6     = $nama4. '.' . $extension6;
 
                 $pdf->move($localfolder, $file);
                 $siteplan->move($localfolder2, $file2);
 
+
+                $fotoDepanRumah ->move($localfolder, $file3);
+                $fotoDalamRumah ->move($localfolder, $file4);
+                $fotoJalan ->move($localfolder, $file5);
+                $fotoGerbangPerumahan ->move($localfolder, $file6);
+
                 $uploadedfile = fopen($localfolder.$file, 'r');
                 $uploadedfile2 = fopen($localfolder2.$file2, 'r');
+
+                $uploadedfile3 = fopen($localfolder.$file3, 'r');
+                $uploadedfile4 = fopen($localfolder.$file4, 'r');
+                $uploadedfile5 = fopen($localfolder.$file5, 'r');
+                $uploadedfile6 = fopen($localfolder.$file6, 'r');
 
                 app('firebase.storage')->getBucket()->upload($uploadedfile, ['nama' => $firebase_storage_path . $nama]);
                 app('firebase.storage')->getBucket()->upload($uploadedfile2, ['nama' => $firebase_storage_path . $nama]);
 
+                app('firebase.storage')->getBucket()->upload($uploadedfile3, ['nama1' => $firebase_storage_path . $nama1]);
+                app('firebase.storage')->getBucket()->upload($uploadedfile4, ['nama2' => $firebase_storage_path . $nama2]);
+                app('firebase.storage')->getBucket()->upload($uploadedfile5, ['nama3' => $firebase_storage_path . $nama3]);
+                app('firebase.storage')->getBucket()->upload($uploadedfile6, ['nama4' => $firebase_storage_path . $nama4]);
+
                 unlink($localfolder . $file);
                 unlink($localfolder2 . $file2);
+
+                unlink($localfolder . $file3);
+                unlink($localfolder . $file4);
+                unlink($localfolder . $file5);
+                unlink($localfolder . $file6);
                 return redirect(route('pengembang-status'));
             }
+            
 }

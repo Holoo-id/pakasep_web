@@ -20,7 +20,7 @@
                 <div class="left"></div>
                 <div class="right">
                     <div class="login-link">
-                        Belum Punya Akun? <a href="#">DAFTAR DISINI</a>
+                        Belum Punya Akun? <a href="/register/pengembang">DAFTAR DISINI</a>
                     </div>
                 </div>
             </div>

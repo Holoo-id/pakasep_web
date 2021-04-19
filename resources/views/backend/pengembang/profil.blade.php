@@ -3,7 +3,7 @@
     <div class="colored-card-wrap ftc">
         <div class="be-colored-card-1">
             <h4 class="colored-card-title">PERUMAHAN TERDAFTAR</h4>
-            <p class="number-data">10</p>
+            <p class="number-data">99</p>
         </div>
         <div class="be-colored-card-2">
             <h4 class="colored-card-title">PENGAJUAN MASUK</h4>
@@ -25,11 +25,11 @@
                 <tbody>
                     <tr>
                         <td class="left-sec">Nama Lengkap</td>
-                        <td>Welly Shergy Verzandy</td>
+                        <td>{{Session::get('nama')}}</td>
                     </tr>
                     <tr>
                         <td class="left-sec">Nomor KTP</td>
-                        <td>32040501910006</td>
+                        <td>{{Session::get('noktp')}}</td>
                     </tr>
                     <tr>
                         <td class="left-sec">Tanggal Lahir</td>
@@ -37,11 +37,11 @@
                     </tr>
                     <tr>
                         <td class="left-sec">No. Handphone</td>
-                        <td>+6285720008787</td>
+                        <td>0{{Session::get('telepon')}}</td>
                     </tr>
                     <tr>
                         <td class="left-sec">Email</td>
-                        <td>hommyshop@gmail.com</td>
+                        <td>{{Session::get('email')}}</td>
                     </tr>
                     <tr>
                         <td class="left-sec">Asosiasi</td>
@@ -57,7 +57,7 @@
                     </tr>
                     <tr>
                         <td class="left-sec">No. Telepon</td>
-                        <td>hommyshop@gmail.com</td>
+                        <td>0{{Session::get('telepon')}}</td>
                     </tr>
                     <tr>
                         <td class="left-sec">Email</td>
@@ -65,7 +65,7 @@
                     </tr>
                     <tr>
                         <td class="left-sec">Website</td>
-                        <td>hommyshop@gmail.com</td>
+                        <td>{{Session::get('website')}}</td>
                     </tr>
                 </tbody>
             </table>
