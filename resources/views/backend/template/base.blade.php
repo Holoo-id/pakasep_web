@@ -39,7 +39,7 @@
     <div class="be-main">
         <div class="welcome-text mb-1">
             Halo,
-            <b>{{Session::get('instansi')}}!</b>
+            <b>{{Session::get('nama')}}!</b>
             <br>Selamat Datang Di Dashboard Pengembang 
             <b>PAKASEP</b>
             <br><br>

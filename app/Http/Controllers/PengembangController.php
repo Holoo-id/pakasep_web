@@ -4,9 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\PengajuanPerumahan;
+use Carbon\Carbon;
+use GuzzleHttp\Stream\Stream;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
-use GuzzleHttp\Stream\Stream;
 use Illuminate\Support\Facades\Session;
 
 
@@ -19,10 +20,22 @@ class PengembangController extends Controller
    
     public function dataPerumahan()
     {
-        $getData = app('firebase.firestore')->database()->collection('Rumah');
-        $getWhere = $getData->where('Id Pengembang','==',Session::get('id'));
-        $rumah = $getWhere->documents();
-        return view('backend.pengembang.data_perumahan',compact('rumah'));
+        $rumah2 = app('firebase.firestore')->database()->collection('Rumah');
+                $getDataPengembang = $rumah2->where('Id Pengembang','==',Session::get('id'));
+                $document = $getDataPengembang->documents();
+                foreach ($document as $documents) {
+                    $getData = $documents->id();
+                }
+
+        // $getData = app('firebase.firestore')->database()->collection('Rumah');
+        $rumah = app('firebase.firestore')->database()->collection('Rumah')->where('Id Pengembang','==',Session::get('id'))->documents();
+        foreach ($rumah as $r) {
+            $devId = $r->id();
+            $developer = app('firebase.firestore')->database()->collection('Developer')->where($devId,'==',Session::get('id'))->documents();
+        }
+        // $devId = app('firebase.firestore')->database()->collection('Developer')->id();
+        // $rumah = $getWhere->documents();
+        return view('backend.pengembang.data_perumahan',compact('rumah', 'developer'));
     }
     public function pengajuanPerumahan(Request $request)
     {
@@ -159,6 +172,9 @@ class PengembangController extends Controller
                     'namaTipe_rumah' => 'required',
                     'kamarMandi_rumah' => 'required|numeric',
                     'harga_rumah' => 'required|numeric',
+                    'tersedia_rumah' => 'required|numeric',
+                    // 'tenor' => 'required|numeric',
+                    // 'bunga' => 'required|numeric',
                     'teknisAtap_rumah' => 'required',
                     'luasLahan_rumah' => 'required|numeric',
                     'teknisDinding_rumah' => 'required',
@@ -191,6 +207,43 @@ class PengembangController extends Controller
             }
             public function postDokumen(Request $request)
             {
+                // Storage
+                    $storage = app('firebase.storage');
+                    $firebase_storage_path = 'application/';  
+                    $firebase_storage_path_images = 'images/units';  
+                    $imageFolder = public_path('images/') .'rumah/';  
+                    $pdfFolder = public_path('pdf/') .'imb/';  
+                // Siteplan
+                    if ($request->has('siteplan_dok')) {
+                        $siteplanInput = $request->file('siteplan_dok');
+                        $siteplanName = 'Siteplan - ';
+                        $siteplanExt = $siteplanInput->getClientOriginalExtension();  
+                        $siteplan = $siteplanName.Carbon::parse()->format('YmdHis').'.'.$siteplanExt;
+                        if ($siteplanInput->move($imageFolder, $siteplan)) {  
+                            $uploadedfile = fopen($imageFolder.$siteplan, 'r');  
+                            $storage->getBucket('rumah-7fp8g')->upload($uploadedfile, ['siteplanName' => $firebase_storage_path_images . $siteplanName]);
+                            unlink($imageFolder . $siteplan);  
+                            echo 'success';  
+                        } else {  
+                            echo 'error';  
+                        }
+                    }
+                    // IMB PDF
+                    if ($request->has('pdfIMB_dok')) {
+                        $imbPdfInput = $request->file('pdfIMB_dok');
+                        $pdfImbName = 'IMB - ';
+                        $pdfImbExt = $imbPdfInput->getClientOriginalExtension();  
+                        $pdfImb = $pdfImbName.Carbon::parse()->format('YmdHis').'.'.$pdfImbExt;
+                        if ($imbPdfInput->move($pdfFolder, $pdfImb)) {  
+                            $uploadedfile = fopen($pdfFolder.$pdfImb, 'r');  
+                            $storage->getBucket('rumah-7fp8g')->upload($uploadedfile, ['pdfImbName' => $firebase_storage_path . $pdfImbName]);
+                            unlink($pdfFolder . $pdfImb);  
+                            echo 'success';  
+                        } else {  
+                            echo 'error';  
+                        }
+                    }
+
                 $validasi = $request->validate([
                     'namaPerumahan_dok' => 'required',
                     'provinsi_dok' => 'required',
@@ -201,8 +254,11 @@ class PengembangController extends Controller
                     'kelurahan_dok' => 'required',
                     'tanggalIMB_dok' => 'required|date',
                     'kecamatan_dok' => 'required',
+                    // 'pdfIMB_dok' => 'required',
                     'kota_dok' => 'required',
+                    // 'siteplan_dok' => 'required',
                 ]);
+
                 if(empty($request->session()->get('pengajuanPerumahan'))){
                     $pengajuanPerumahan = new PengajuanPerumahan();
                     $pengajuanPerumahan->fill($validasi);
@@ -236,17 +292,113 @@ class PengembangController extends Controller
             }
             public function postVerifikasi(Request $request)
             {
-                $firebase_storage_path = 'application/'; 
-                $firebase_storage_path_images = 'images/'; 
+                // Storage
+                    $storage = app('firebase.storage');
+                    $firebase_storage_path = 'application/';  
+                    $firebase_storage_path_images = 'images/units';  
+                    $imageFolder = public_path('images/') .'rumah/';  
+                    $pdfFolder = public_path('pdf/') .'imb/';  
+                // Siteplan
+                    if ($request->has('siteplan_dok')) {
+                        $siteplanInput = $request->file('siteplan_dok');
+                        $siteplanName = 'Siteplan - ';
+                        $siteplanExt = $siteplanInput->getClientOriginalExtension();  
+                        $siteplan = $siteplanName.Carbon::parse()->format('YmdHis').'.'.$siteplanExt;
+                        if ($siteplanInput->move($imageFolder, $siteplan)) {  
+                            $uploadedfile = fopen($imageFolder.$siteplan, 'r');  
+                            $storage->getBucket('rumah-7fp8g')->upload($uploadedfile, ['siteplanName' => $firebase_storage_path_images . $siteplanName]);
+                            unlink($imageFolder . $siteplan);  
+                            echo 'success';  
+                        } else {  
+                            echo 'error';  
+                        }
+                    }
+                // Foto Depan
+                    if ($request->has('fotoDepanRumah')) {
+                        $depanInput = $request->file('fotoDepanRumah');
+                        $depanName = 'Depan - ';
+                        $depanExt = $depanInput->getClientOriginalExtension();  
+                        $depan = $depanName.Carbon::parse()->format('YmdHis').'.'.$depanExt;
+                        if ($depanInput->move($imageFolder, $depan)) {  
+                            $uploadedfile = fopen($imageFolder.$depan, 'r');  
+                            $storage->getBucket('rumah-7fp8g')->upload($uploadedfile, ['depanName' => $firebase_storage_path_images . $depanName]);
+                            unlink($imageFolder . $depan);  
+                            echo 'success';  
+                        } else {  
+                            echo 'error';  
+                        }
+                    }
+                // Foto Dalam
+                    if ($request->has('fotoDalamRumah')) {
+                        $dalamInput = $request->file('fotoDalamRumah');
+                        $dalamName = 'Dalam - ';
+                        $dalamExt = $dalamInput->getClientOriginalExtension();  
+                        $dalam = $dalamName.Carbon::parse()->format('YmdHis').'.'.$dalamExt;
+                        if ($dalamInput->move($imageFolder, $dalam)) {  
+                            $uploadedfile = fopen($imageFolder.$dalam, 'r');  
+                            $storage->getBucket('rumah-7fp8g')->upload($uploadedfile, ['dalamName' => $firebase_storage_path_images . $dalamName]);
+                            unlink($imageFolder . $dalam);  
+                            echo 'success';  
+                        } else {  
+                            echo 'error';  
+                        }
+                    }
+                // Foto Jalan
+                    if ($request->has('fotoJalan')) {
+                        $jalanInput = $request->file('fotoJalan');
+                        $jalanName = 'Jalan - ';
+                        $jalanExt = $jalanInput->getClientOriginalExtension();  
+                        $jalan = $jalanName.Carbon::parse()->format('YmdHis').'.'.$jalanExt;
+                        if ($jalanInput->move($imageFolder, $jalan)) {  
+                            $uploadedfile = fopen($imageFolder.$jalan, 'r');  
+                            $storage->getBucket('rumah-7fp8g')->upload($uploadedfile, ['jalanName' => $firebase_storage_path_images . $jalanName]);
+                            unlink($imageFolder . $jalan);  
+                            echo 'success';  
+                        } else {  
+                            echo 'error';  
+                        }
+                    }
+                // Foto Gerbang
+                    if ($request->has('fotoGerbangPerumahan')) {
+                        $gerbangInput = $request->file('fotoGerbangPerumahan');
+                        $gerbangName = 'Gerbang - ';
+                        $gerbangExt = $gerbangInput->getClientOriginalExtension();  
+                        $gerbang = $gerbangName.Carbon::parse()->format('YmdHis').'.'.$gerbangExt;
+                        if ($gerbangInput->move($imageFolder, $gerbang)) {  
+                            $uploadedfile = fopen($imageFolder.$gerbang, 'r');  
+                            $storage->getBucket('rumah-7fp8g')->upload($uploadedfile, ['gerbangName' => $firebase_storage_path_images . $gerbangName]);
+                            unlink($imageFolder . $gerbang);  
+                            echo 'success';  
+                        } else {  
+                            echo 'error';  
+                        }
+                    }
+                // IMB PDF
+                    if ($request->has('pdfIMB_dok')) {
+                        $imbPdfInput = $request->file('pdfIMB_dok');
+                        $pdfImbName = 'IMB - ';
+                        $pdfImbExt = $imbPdfInput->getClientOriginalExtension();  
+                        $pdfImb = $pdfImbName.Carbon::parse()->format('YmdHis').'.'.$pdfImbExt;
+                        if ($imbPdfInput->move($pdfFolder, $pdfImb)) {  
+                            $uploadedfile = fopen($pdfFolder.$pdfImb, 'r');  
+                            $storage->getBucket('rumah-7fp8g')->upload($uploadedfile, ['pdfImbName' => $firebase_storage_path . $pdfImbName]);
+                            unlink($pdfFolder . $pdfImb);  
+                            echo 'success';  
+                        } else {  
+                            echo 'error';  
+                        }
+                    }
 
                 $rumah = app('firebase.firestore')->database()->collection('Rumah')->newDocument();
                 $rumah->set([
                     'Id Pengembang' => Session::get('id'),
-                    'Instansi'  =>  Session::get('instansi'),
-                    'Tanggal'  =>  date('Y-m-d/H:i:s'),
+                    'Tanggal'  =>  date('Y-m-d H:i:s'),
+                    // 'Instansi'  =>  Session::get('instansi'),
+
                     'Nama Tipe Rumah' => $request->namaTipe_verif,
                     'Kamar Mandi' => $request->kamarMandi_verif,
                     'Harga' => $request->harga_verif,
+                    'Stok' => $request->tersedia_verif,
                     'Teknis Atap' => $request->teknisAtap_verif,
                     'Luas Lahan' => $request->luasLahan_verif,
                     'Teknis Dinding' => $request->teknisDinding_verif,
@@ -264,82 +416,15 @@ class PengembangController extends Controller
                     'Tanggal IMB' => $request->tanggalIMB_verif,
                     'Kecamatan' => $request->kecamatan_verif,
                     'Kota' => $request->kota_verif,
-                    'PDF IMB' => $firebase_storage_path,
-                    'Foto Siteplan' => $firebase_storage_path_images,
-                    'fotoDepanRumah' => $firebase_storage_path_images,
-                    'fotoDalamRumah' => $firebase_storage_path_images,
-                    'fotoJalan' => $firebase_storage_path_images,
-                    'fotoGerbangPerumahan' => $firebase_storage_path_images
+                    
+                    'PDF IMB' => $pdfImb ?? '',
+                    'Foto Siteplan' => $siteplan ?? '',
+                    'Foto Depan Rumah' => $depan ?? '',
+                    'Foto Dalam Rumah' => $dalam ?? '',
+                    'Foto Jalan' => $jalan ?? '',
+                    'Foto Gerbang Perumahan' => $gerbang ?? ''
                 ]);
-                
-                $pdf = $request->pdfIMB_verif;
-                $siteplan = $request->siteplan_verif;
-                $fotoDepanRumah = $request->fotoDepanRumah;
-                $fotoDalamRumah = $request->fotoDalamRumah;
-                $fotoJalan = $request->fotoJalan;
-                $fotoGerbangPerumahan = $request->fotoGerbangPerumahan;
 
-                $nama1 = $request->txtFotoDepanRumah;
-                $nama2 = $request->txtFotoDalamRumah;
-                $nama3 = $request->txtFotoJalan;
-                $nama4 = $request->txtFotoGerbangPerumahan;
-
-                $rumah2 = app('firebase.firestore')->database()->collection('Rumah');
-                $getDataPengembang = $rumah2->where('Id Pengembang','==',Session::get('id'));
-                $document = $getDataPengembang->documents();
-                foreach ($document as $documents) {
-                    $getData = $documents->id();
-                }
-                $nama = $getData;
-                $localfolder = public_path('images') .'/';
-                $localfolder2 = public_path('pdf') .'/';
-
-                $extension = $pdf->getClientOriginalExtension();
-                $extension2 = $siteplan->getClientOriginalExtension();
-                $extension3 = $fotoDepanRumah->getClientOriginalExtension();
-                $extension4 = $fotoDalamRumah->getClientOriginalExtension();
-                $extension5 = $fotoJalan->getClientOriginalExtension();
-                $extension6 = $fotoGerbangPerumahan->getClientOriginalExtension();
-
-                $file      = $nama. '.' . $extension;
-                $file2     = $nama. '.' . $extension2;
-                $file3      = $nama1. '.' . $extension3;
-                $file4     = $nama2. '.' . $extension4;
-                $file5      = $nama3. '.' . $extension5;
-                $file6     = $nama4. '.' . $extension6;
-
-                $pdf->move($localfolder, $file);
-                $siteplan->move($localfolder2, $file2);
-
-
-                $fotoDepanRumah ->move($localfolder, $file3);
-                $fotoDalamRumah ->move($localfolder, $file4);
-                $fotoJalan ->move($localfolder, $file5);
-                $fotoGerbangPerumahan ->move($localfolder, $file6);
-
-                $uploadedfile = fopen($localfolder.$file, 'r');
-                $uploadedfile2 = fopen($localfolder2.$file2, 'r');
-
-                $uploadedfile3 = fopen($localfolder.$file3, 'r');
-                $uploadedfile4 = fopen($localfolder.$file4, 'r');
-                $uploadedfile5 = fopen($localfolder.$file5, 'r');
-                $uploadedfile6 = fopen($localfolder.$file6, 'r');
-
-                app('firebase.storage')->getBucket()->upload($uploadedfile, ['nama' => $firebase_storage_path . $nama]);
-                app('firebase.storage')->getBucket()->upload($uploadedfile2, ['nama' => $firebase_storage_path . $nama]);
-
-                app('firebase.storage')->getBucket()->upload($uploadedfile3, ['nama1' => $firebase_storage_path . $nama1]);
-                app('firebase.storage')->getBucket()->upload($uploadedfile4, ['nama2' => $firebase_storage_path . $nama2]);
-                app('firebase.storage')->getBucket()->upload($uploadedfile5, ['nama3' => $firebase_storage_path . $nama3]);
-                app('firebase.storage')->getBucket()->upload($uploadedfile6, ['nama4' => $firebase_storage_path . $nama4]);
-
-                unlink($localfolder . $file);
-                unlink($localfolder2 . $file2);
-
-                unlink($localfolder . $file3);
-                unlink($localfolder . $file4);
-                unlink($localfolder . $file5);
-                unlink($localfolder . $file6);
                 return redirect(route('pengembang-status'));
             }
             

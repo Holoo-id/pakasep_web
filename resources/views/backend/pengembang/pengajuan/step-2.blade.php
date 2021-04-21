@@ -76,7 +76,6 @@
                 </select>
                 <p class="error-text pv-1" style="color: #FF5756;  font-size: 0.85em;line-height: 1.5em;">{{ $errors->first('kecamatan_dok') }}</p>
             </div>
-           
             <div class="form-column">
                 <label for="" class="be-form-label mb-1 mt-2">Kelurahan</label>
                 <select name="kelurahan_dok" id="kelurahan_dok" class="be-form">
@@ -86,8 +85,8 @@
                 </select>
                 <p class="error-text pv-1" style="color: #FF5756;  font-size: 0.85em;line-height: 1.5em;">{{ $errors->first('kelurahan_dok') }}</p>
             </div>
-        
-        <div class="button-bar w-75">
+        </div>
+        <div class="button-bar w-full">
             <a href="{{ route('step-1') }}" class="prevBtn bg-purple btn-fill ftc" type="button" >KEMBALI</a>
             <!-- <button class="nextBtn bg-purple btn-fill ftc" id="btn" type="button" onclick="getValueDokToVerif()">SIMPAN</button> -->
             <input type="submit" value="SIMPAN" id="btn" class="nextBtn bg-purple btn-fill ftc" onclick="getValueDokToVerif()" >

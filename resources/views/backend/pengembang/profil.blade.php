@@ -23,50 +23,72 @@
             <a href="">edit</a>
             <table>
                 <tbody>
+                    @if(Session::get('nama') != '')
+                        <tr>
+                            <td class="left-sec">Nama Lengkap</td>
+                            <td>{{Session::get('nama')}}</td>
+                        </tr>
+                    @endif
+                    @if(Session::get('noktp') != '')
+                        <tr>
+                            <td class="left-sec">Nomor KTP</td>
+                            <td>{{Session::get('noktp')}}</td>
+                        </tr>
+                    @endif
+                    @if(Session::get('tgllahir') != '')
+                        <tr>
+                            <td class="left-sec">Tanggal Lahir</td>
+                            <td>{{Session::get('tgllahir')}}</td>
+                        </tr>
+                    @endif
+                    @if(Session::get('telepon') != '')
+                        <tr>
+                            <td class="left-sec">No. Handphone</td>
+                            <td>+62 {{Session::get('telepon')}}</td>
+                        </tr>
+                    @endif
+                    @if(Session::get('email') != '')
+                        <tr>
+                            <td class="left-sec">Email</td>
+                            <td>{{Session::get('email')}}</td>
+                        </tr>
+                    @endif
+                    @if(Session::get('asosiasi') != '')
+                        <tr>
+                            <td class="left-sec">Asosiasi</td>
+                            <td>{{Session::get('asosiasi')}}</td>
+                        </tr>
+                    @endif
+                    @if(Session::get('instansi') != '')
                     <tr>
-                        <td class="left-sec">Nama Lengkap</td>
-                        <td>{{Session::get('nama')}}</td>
+                        <td class="left-sec">Pengembang</td>
+                        <td>{{Session::get('instansi')}}</td>
                     </tr>
-                    <tr>
-                        <td class="left-sec">Nomor KTP</td>
-                        <td>{{Session::get('noktp')}}</td>
-                    </tr>
-                    <tr>
-                        <td class="left-sec">Tanggal Lahir</td>
-                        <td>5 Januari 1991</td>
-                    </tr>
-                    <tr>
-                        <td class="left-sec">No. Handphone</td>
-                        <td>0{{Session::get('telepon')}}</td>
-                    </tr>
-                    <tr>
-                        <td class="left-sec">Email</td>
-                        <td>{{Session::get('email')}}</td>
-                    </tr>
-                    <tr>
-                        <td class="left-sec">Asosiasi</td>
-                        <td>hommyshop@gmail.com</td>
-                    </tr>
-                    <tr>
-                        <td class="left-sec">Nama Pengembang</td>
-                        <td>hommyshop@gmail.com</td>
-                    </tr>
-                    <tr>
-                        <td class="left-sec">Kantor Pemasaran</td>
-                        <td>hommyshop@gmail.com</td>
-                    </tr>
-                    <tr>
-                        <td class="left-sec">No. Telepon</td>
-                        <td>0{{Session::get('telepon')}}</td>
-                    </tr>
-                    <tr>
-                        <td class="left-sec">Email</td>
-                        <td>hommyshop@gmail.com</td>
-                    </tr>
-                    <tr>
-                        <td class="left-sec">Website</td>
-                        <td>{{Session::get('website')}}</td>
-                    </tr>
+                    @endif
+                    @if(Session::get('pemasaran') != '')
+                        <tr>
+                            <td class="left-sec">Kantor Pemasaran</td>
+                            <td>{{Session::get('pemasaran')}}</td>
+                        </tr>
+                    @endif
+                    @if(Session::get('telepon') != '')
+                        <tr>
+                            <td class="left-sec">No. Telepon</td>
+                            <td>+62 {{Session::get('telepon2') ?? ''}}</td>
+                        </tr>
+                    @endif
+                    @if(Session::get('email') != '')
+                        <tr>
+                            <td class="left-sec">Email</td>
+                            <td>{{Session::get('email2')}}</td>
+                        </tr>
+                    @endif
+                    @if(Session::get('website') != '')
+                        <tr>
+                            <td class="left-sec">Website</td>
+                            <td>{{Session::get('website') ?? ''}}</td>
+                        </tr>
+                    @endif
                 </tbody>
             </table>
         </div>

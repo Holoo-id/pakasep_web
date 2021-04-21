@@ -55,7 +55,7 @@ Route::prefix('/pengembang')->group(function () {
         Route::post('/dokumen', [PengembangController::class, 'postDokumen'])->name('post-2');
         Route::post('/post-step3', [PengembangController::class, 'uploadImage'])->name('post-3');
         Route::get('/step-3', [PengembangController::class, 'pengajuanVerifikasi'])->name('step-3');
-        Route::post('/post-step4', [PengembangController::class, 'postVerifikasi'])->name('post-4');
+        Route::post('/verifikasi', [PengembangController::class, 'postVerifikasi'])->name('post-4');
     });
     Route::get('/profil-pengembang', [PengembangController::class, 'profil'])->name('pengembang-profil');
     Route::get('/date', [PengembangController::class, 'date'])->name('date');

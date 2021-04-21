@@ -14,6 +14,21 @@
                 <p class="error-text pv-1" style="color: #FF5756;  font-size: 0.85em;line-height: 1.5em;">{{ $errors->first('harga_rumah') }}</p>
             </div>
             <div class="form-column">
+                <label for="" class="be-form-label mb-1 mt-2">Rumah Tersedia</label>
+                <input class="be-form" type="text" name="tersedia_rumah" id="tersedia_rumah" placeholder="Masukkan Stok" value="{{ $pengajuanPerumahan->tersedia_rumah ?? '' }}">
+                <p class="error-text pv-1" style="color: #FF5756;  font-size: 0.85em;line-height: 1.5em;">{{ $errors->first('tersedia_rumah') }}</p>
+            </div>
+            <!-- <div class="form-column">
+                <label for="" class="be-form-label mb-1 mt-2">Tenor</label>
+                <input class="be-form" type="text" name="tenor" id="tenor" placeholder="Masukkan Waktu Menyicil (Bulan)" value="{{ $pengajuanPerumahan->tenor ?? '' }}">
+                <p class="error-text pv-1" style="color: #FF5756;  font-size: 0.85em;line-height: 1.5em;">{{ $errors->first('tenor') }}</p>
+            </div>
+            <div class="form-column">
+                <label for="" class="be-form-label mb-1 mt-2">Bunga</label>
+                <input class="be-form" type="text" name="bunga" id="bunga" placeholder="Masukkan Bunga" value="{{ $pengajuanPerumahan->bunga ?? '' }}">
+                <p class="error-text pv-1" style="color: #FF5756;  font-size: 0.85em;line-height: 1.5em;">{{ $errors->first('bunga') }}</p>
+            </div> -->
+            <div class="form-column">
                 <label for="" class="be-form-label mb-1 mt-2">Luas Lahan</label>
                 <input class="be-form" type="text" name="luasLahan_rumah" id="luasLahan_rumah" placeholder="Masukkan Luas Lahan" value="{{ $pengajuanPerumahan->luasLahan_rumah ?? '' }}">
                 <p class="error-text pv-1" style="color: #FF5756;  font-size: 0.85em;line-height: 1.5em;">{{ $errors->first('luasLahan_rumah') }}</p>
