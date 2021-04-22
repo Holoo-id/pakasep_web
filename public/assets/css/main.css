@@ -706,6 +706,12 @@ p.text-divider > span {
   width: 100%;
 }
 
+.half-page-wrap .half-page-content .hpc-body form {
+  max-height: -webkit-fill-available;
+  overflow: auto;
+  scrollbar-width: none;
+}
+
 .half-page-wrap .half-page-content .hpc-body hr {
   width: 100%;
   min-height: 1px;
@@ -1141,6 +1147,11 @@ input[type=search] {
   padding: 1rem;
   text-align: center;
   width: 70px;
+}
+
+.circle-button[disabled] {
+  cursor: default;
+  pointer-events: none;
 }
 
 .dt-g-btn {

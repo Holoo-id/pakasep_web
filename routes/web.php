@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BankController;
 use App\Http\Controllers\FrontController;
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PengembangController;
 use App\Http\Controllers\RumahController;
 
@@ -43,6 +44,18 @@ Route::prefix('/admin')->group(function () {
 });
 Route::prefix('/bank')->group(function () {
     Route::get('/', [BankController::class, 'index'])->name('bank-main');
+});
+Route::prefix('/log')->group(function () {
+    Route::get('/', [LoginController::class, 'joinUs'])->name('log-join');
+    Route::get('/auth', 'App\Http\Controllers\LoginController@auth')->name('auth-login');
+    Route::get('/login', [LoginController::class, 'index'])->name('log-login');
+    Route::prefix('/register')->group(function (){
+        // Route::get('/pengajuan-perumahan', [PengembangController::class, 'pengajuanPerumahan'])->name('pengembang-pengajuan');
+        Route::get('/satu', [LoginController::class, 'registerInformasiPerusahaan'])->name('satu');
+        Route::post('/informasi-perusahaan', [LoginController::class, 'postInformasiPerusahaan'])->name('post-satu');
+        Route::get('/dua', [LoginController::class, 'registerInformasiPersonal'])->name('dua');
+        Route::post('/informasi-pribadi', [LoginController::class, 'postInformasiPersonal'])->name('post-dua');
+    });
 });
 Route::prefix('/pengembang')->group(function () {
     Route::get('/edit-perumahan', [PengembangController::class, 'editPerumahan'])->name('pengembang-edit');
