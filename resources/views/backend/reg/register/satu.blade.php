@@ -20,11 +20,8 @@
             <select name="instansi" id="instansi" class="be-form">
                 <option value="">None</option>
                 @foreach($developer as $dev)
-                    @if($register->instansi == $dev)
                         <option value="{{ $dev }}" selected>{{ $dev }}</option>
-                    @else
                         <option value="{{ $dev }}">{{ $dev }}</option>
-                    @endif
                 @endforeach
             </select>
             <p class="error-text pv-1" style="color: #FF5756;  font-size: 0.85em;line-height: 1.5em;">{{ $errors->first('instansi') }}</p>

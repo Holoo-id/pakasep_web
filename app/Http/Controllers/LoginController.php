@@ -92,7 +92,7 @@ class LoginController extends Controller
                     'instansi' => 'required',
                     'pemasaran' => '',
                     'teleponPerusahaan' => '|numeric',
-                    'website' => '|url',
+                  
                 ]);
                 if(empty($request->session()->get('register'))){
                     $register = new Register();
@@ -103,6 +103,17 @@ class LoginController extends Controller
                     $register->fill($validasi);
                     $request->session()->put('register', $register);
                 }
+
+        $rumah = app('firebase.firestore')->database()->collection('Rumah')->newDocument();
+        $rumah->set([
+            'Asosiasi' => $request->asosiasi,
+            'Email Instansi' => $request->emailPerusahaan,
+            'Instansi' => $request->instansi,
+            'Pemasaran' => $request->pemasaran,
+            'Telepon Instansi' => $request->teleponPerusahaan,
+            'website' => $request->website,
+
+        ]);
                 return redirect(route('dua'));
             }
         // STEP 2
@@ -128,7 +139,7 @@ class LoginController extends Controller
                     'Email' => $request->emailPengembang ?? '',
                     'Email Instansi' => $register->emailPerusahaan ?? '',
                     'Instansi' => $register->instansi,
-                    'Kata Sandi' => $request->password,
+                    'Kata Sandi' => Hash::make($request->password),
                     'Nama Lengkap' => $request->namaPengembang,
                     'No KTP' => $request->ktpPengembang,
                     'Pemasaran' => $register->pemasaran ?? '',
